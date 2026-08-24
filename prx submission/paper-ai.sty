@@ -1,0 +1,6 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{paper-ai}[2026/08/23 AI review markers]
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\NewDocumentCommand{\ai}{m}{\textcolor{yellow}{[AI #1]}}
+\NewDocumentCommand{\forai}{m}{\textcolor{blue}{[FORAI #1]}}
