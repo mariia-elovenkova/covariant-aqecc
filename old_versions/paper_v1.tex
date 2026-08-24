@@ -1,0 +1,802 @@
+\documentclass[twocolumn,superscriptaddress,aps,showpacs,amsmath,amstex,amssymb,citeautoscript,floatfix,pra,preprintnumbers]{revtex4-2}
+\pdfoutput=1
+\usepackage[english]{babel}
+ 
+\usepackage{letltxmacro}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{algpseudocode}
+ 
+\sisetup{
+  separate-uncertainty = true,
+  table-number-alignment = center
+}
+\LetLtxMacro{\ORIGselectlanguage}{\selectlanguage}
+\makeatletter
+\DeclareRobustCommand{\selectlanguage}[1]{%
+  \@ifundefined{alias@\string#1}
+    {\ORIGselectlanguage{#1}}
+    {\begingroup\edef\x{\endgroup
+       \noexpand\ORIGselectlanguage{\@nameuse{alias@#1}}}\x}%
+}
+\newcommand{\definelanguagealias}[2]{%
+  \@namedef{alias@#1}{#2}%
+}
+\makeatother
+ 
+\makeatletter
+\def\maketitle{
+\@author@finish
+\title@column\titleblock@produce
+\suppressfloats[t]}
+\makeatother
+ 
+\definelanguagealias{en}{english}
+\definelanguagealias{English}{english}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{color}
+\usepackage[percent]{overpic}
+\usepackage{soul}
+\usepackage{wasysym}
+\usepackage{dsfont}
+\usepackage{float}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{textgreek}
+\usepackage{tcolorbox}
+\usepackage[dvipsnames]{xcolor}
+ 
+\newcounter{alg}
+ 
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = red
+}
+\usepackage[mathscr]{euscript}
+ 
+\usepackage{varwidth}
+\usepackage[lined,boxed,ruled,norelsize,linesnumbered]{algorithm2e}
+\usepackage{verbatim}
+\usepackage[normalem]{ulem}
+\usepackage{cleveref}
+ 
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+ 
+% ============================================================
+%  Theorem-like environments
+% ============================================================
+\newtheorem{theorem}{Theorem}
+\newtheorem{result}{Result}
+\newtheorem{lemma}{Lemma}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{lem}{\protect\lemmaname}
+\theoremstyle{plain}
+\newtheorem{rem}[thm]{\protect\remarkname}
+\theoremstyle{plain}
+\newtheorem*{lem*}{\protect\lemmaname}
+\theoremstyle{plain}
+\newtheorem*{thm*}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{prop}[thm]{\protect\propositionname}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{\protect\corollaryname}
+\newtheorem{defn}{Definition}
+\newtheorem{prob}[thm]{Problem}
+\newtheorem{notation}[thm]{Notation}
+ 
+\newtheorem{manualtheoreminner}{Theorem}
+\newenvironment{manualtheorem}[1]{%
+  \renewcommand\themanualtheoreminner{#1}%
+  \manualtheoreminner
+}{\endmanualtheoreminner}
+ 
+% ============================================================
+%  Algorithm box (tcolorbox-based)
+% ============================================================
+\renewcommand{\thealg}{\arabic{alg}}
+\newtcolorbox[use counter=alg,
+              crefname={algorithm}{algorithms},
+              Crefname={Algorithm}{Algorithms}]
+{alg}[2][]{%
+  floatplacement=#1,
+  float,
+  colback=cyan!5!white,
+  colframe=cyan!50!black,
+  colbacktitle=cyan!85!black,
+  fonttitle=\bfseries,
+  title=Algorithm~\thealg: #2
+}
+ 
+% ============================================================
+%  Float placement tuning
+% ============================================================
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.9}
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+\setcounter{totalnumber}{20}
+ 
+% ============================================================
+%  Custom commands — comments / annotations
+% ============================================================
+% \newcommand{\hyh}[1]{{\color[rgb]{0.,0.6,0.9}\textsf{[HYH:#1]}}}
+% \newcommand{\MM}[1]{{\color{orange}\textsf{[MM:#1]}}}
+ 
+% ============================================================
+%  Custom commands — shortcuts
+% ============================================================
+\NewDocumentCommand{\hyh}{m}{\textcolor{purple}{[HYH: #1]}}
+\definecolor{mycrimson}{HTML}{A60808}
+\NewDocumentCommand{\elo}{m}{\textcolor{mycrimson}{[ELO: #1]}}
+\newcommand{\EPR}{\mathrm{EPR}}
+\newcommand{\dia}[3]{\raisebox{#3pt}{\includegraphics[height=#2pt]{figs/#1}}}
+\newcommand{\eq}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\eqs}[1]{\begin{equation}\begin{split}#1\end{split}\end{equation}}
+\newcommand{\eqnref}[1]{Eq.\,\eqref{#1}}
+\newcommand{\figref}[1]{Fig.\,\ref{#1}}
+\newcommand{\tabref}[1]{Tab.\,\ref{#1}}
+\newcommand{\secref}[1]{Sec.\,\ref{#1}}
+\newcommand{\appref}[1]{Appendix\,\ref{#1}}
+\newcommand{\refcite}[1]{Ref.\,\cite{#1}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\cd}[1]{c^{\dagger}_{#1}}
+\newcommand{\cc}[1]{c_{#1}}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\sandwich}[3]{\mbox{$ \langle #1 | #2 | #3 \rangle $}}
+\newcommand{\red}[1]{{\color{red} #1}}
+\DeclareMathOperator*{\bigrarrow}{\rightarrow}
+\DeclareMathOperator*{\biglongrarrow}{\longrightarrow}
+ 
+% ============================================================
+%  Affiliations (edit as needed)
+% ============================================================
+% \newcommand{\MyAffiliation}{Department of ..., University of ..., City, Country}
+ 
+% ============================================================
+%  Spacing
+% ============================================================
+\setlength{\belowcaptionskip}{-10pt}
+\setlength{\skip\footins}{24pt}
+\raggedbottom
+ 
+% ============================================================
+\begin{document}
+ 
+\title{
+Covariant codes for approximate analog fault tolerance\\
+% Lie-algebraic covariant codes for approximate fault-tolerant analog quantum computation\\
+% Robust analog quantum encoding with covariant approximate QEC\\
+% Lie-algebraic covariant approximate quantum error correction\\
+}
+ 
+\author{Mariia Elovenkova}
+\altaffiliation{\href{mailto:masha.elovenkova@gmail.com}{masha.elovenkova@gmail.com}}
+\affiliation{Department of Physics, Harvard University, Cambridge, MA 02138, USA}
+
+\author{Hong-Ye Hu}
+\altaffiliation{\href{mailto:hongyehu.physics@gmail.com}{hongyehu.physics@gmail.com}}
+\affiliation{Department of Physics, Harvard University, Cambridge, MA 02138, USA}
+
+\author{Susanne F. Yelin}
+\altaffiliation{\href{mailto:syelin@g.harvard.edu}{syelin@g.harvard.edu}}
+\affiliation{Department of Physics, Harvard University, Cambridge, MA 02138, USA}
+ 
+\begin{abstract}
+The Eastin-Knill theorem prohibits exact quantum error-correcting codes with a continuous group of transversal logical gates. This makes quantum error correction incompatible with analog quantum systems where continuous symmetries and evolution are native. We show that approximate quantum error correction converts this obstruction into a quantitative design principle for robust analog dynamics. We construct explicit $\mathrm{SU}(d)$-covariant codes whose worst-case purified distances against erasure noise scale as $\Theta(1/N)$ for 1-, 2-, and 3-qudit erasures, saturating the approximate Eastin–Knill bound up to constants. To obtain favorable scaling under erasure noise, we exploit the freedom in the multiplicity space associated with the target irreducible code space. Since the encoding map is an intertwiner, the code is fully specified by a choice of multiplicity vector; by imposing suitable permutation symmetries on this vector, we derive code families with improved erasure-scaling properties. Based on this construction, we introduce $\oplus_i \mathfrak{su}(d_i)$-covariant codes that protect the dynamical Lie algebra generated by the target Hamiltonians for quantum simulation, which naturally lies in the so-called invariant Lie algebra $\left(\oplus_i \mathfrak{su}(d_i)\right)\oplus\left(\oplus_j\mathfrak{u}(1)\right)$ when the system has a finite group of symmetries. For the invariant algebra, we also give a sufficient criterion for identifying symmetry-breaking Hamiltonians that extend the encoded dynamics to universal quantum computation. In the setting of $\oplus_i \mathfrak{su}(d_i)$-covariant codes, these symmetry-breaking terms play the role of a resource operations.
+
+
+% The Eastin-Knill theorem prohibits exact quantum error-correcting codes with a continuous group of transversal logical gates. This makes quantum error correction incompatible with analog quantum systems where continuous symmetries are native. To circumvent this obstruction, we propose performing robust analog quantum computation with transversal continuous operations that achieve approximate quantum error correction. We construct explicit families of SU($d$)-covariant codes encoding a $d$-dimensional logical system into $N$ copies of an irreducible representation, with worst-case infidelity $\Theta(1/N)$ under single-site erasure, saturating known lower bounds up to constants. We also extend the analysis to multi-qubit erasure errors. Since these codes require physical subsystem dimensions that grow with the logical dimension, we further introduce Lie-algebraic covariant codes, which are covariant under the subalgebra generated by the target Hamiltonians and use only fixed-dimensional physical systems. This enables approximate fault-tolerant analog quantum computation with transversal and continuous operations.
+
+
+% The Eastin-Knill theorem prohibits exact quantum error-correcting codes with a continuous group of transversal logical gates. The traditional approach digitalizes continuous quantum evolution into discrete gate sets, which introduces operational overheads. To circumvent this obstruction, we propose performing robust analog quantum computation with transversal continuous operations that achieve approximate quantum error correction. We construct explicit families of SU($d$)-covariant codes encoding a $d$-dimensional logical system into $N$ copies of an irreducible representation, with worst-case infidelity $\Theta(1/N)$
+%  under single-site erasure, saturating known lower bounds up to constants. Guided by this framework, we then propose Lie-algebraic covariant codes for simulating globally controlled Hamiltonians. The encoding is covariant under the subalgebra generated by the Hamiltonians. This enables approximate fault-tolerant analog quantum computation using transversal and continuous analog operations.
+ 
+ 
+ 
+%  We then prove sufficient conditions for a set of symmetry-respecting Hamiltonians, augmented by a single symmetry-breaking interaction, to generate universal dynamics. Combining these results, we introduce Lie-algebraic covariant codes: encodings covariant under the Lie algebra generated by the controllable Hamiltonians of an analog quantum processor, in which the symmetry-breaking Hamiltonian becomes a resource gate analogous to the TT
+% T gate in the Clifford+T+T
+% +T framework. This enables approximate fault-tolerant analog quantum computation using fixed-dimensional physical systems.
+
+% The Eastin-Knill theorem prohibits exact quantum error-correcting codes 
+% with a continuous group of transversal logical gates. The traditional approach digitalizes quantum evolution into discrete gate sets. To circumvent this obstruction, we propose performing robust analog quantum computation with transversal continuous operations that achieve approximate quantum error correction (AQEC).
+% First, we construct families of SU($d$)-covariant codes encoding a $d$-dimensional logical system 
+% into $N$ copies of an irreducible representation. We prove these codes have worst-case infidelity $\Theta(1/N)$ under single-site erasure error, saturating known lower bounds up to constants. Guided by this construction, we propose Lie-algebraic covariant codes for simulating globally controlled Hamiltonians. The encoding is covariant under the subalgebra generated by the Hamiltonians. Our work paves the path to perform robust analog quantum information processing with transversal and continuous operations.
+
+
+
+% Second, we prove sufficient conditions, 
+% formulated in terms of the dynamical Lie algebra and discrete symmetries, 
+% for a set of analog Hamiltonians augmented by a single symmetry-breaking interaction 
+% to generate universal dynamics.
+% Combining these results, we introduce Lie-algebraic covariant codes: 
+% encodings covariant under the subalgebra generated by native Hamiltonians, 
+% in which the symmetry-breaking Hamiltonian plays the role of a resource gate,
+% analogous to the $T$ gate in the Clifford$+T$ framework.
+% This construction enables universal analog quantum computation 
+% using fixed-dimensional physical systems with a single non-transversal resource,
+% providing a concrete path toward fault-tolerant quantum simulation.
+\end{abstract}
+\maketitle
+ 
+% ============================================================
+%  MAIN TEXT
+% ============================================================
+
+
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/theme.pdf}
+    \caption{(a)}
+    \label{fig:theme}
+\end{figure*}
+
+\textit{Introduction.---}
+Quantum error correction is essential for scalable quantum computation, 
+yet the structure of physically realizable codes is fundamentally constrained by symmetry. 
+The Eastin-Knill theorem~\cite{Eastin2009} establishes that no finite-dimensional quantum error-correcting code that corrects arbitrary local errors can admit a universal set of transversal logical gates: the group of transversal logical operations is necessarily finite. 
+Consequently, exact quantum error-correcting codes cannot be covariant under any continuous symmetry group. Over the past decade, substantial progress has been made in quantum error correction for digital quantum computers, including proposals for quantum low-density parity-check codes with high encoding rates \cite{Bravyi2024,Panteleev2022,Breuckmann2021,Qian1}. 
+Experimentally, break-even performance has been demonstrated at the level of logical quantum memory, where increasing the number of physical qubits reduces logical error rates \cite{Krinner2022,AcharyaGoogle2025,RyanAnderson2021,daSilvaPaetznick2024,Reichardt2024Tesseract,Bluvstein2024,Reichardt2024NeutralAtom}. 
+However, achieving fault tolerance at the level of full quantum algorithms remains an outstanding challenge.
+
+In parallel, analog quantum platforms have emerged as a powerful paradigm for quantum simulation and computation \cite{Bloch2012,Browaeys2020,Daley2022,Schaefer2020}. 
+Recent experiments have achieved ultra-low temperature preparation of strongly correlated states, such as the Fermi-Hubbard model, in regimes that remain challenging for classical methods \cite{Xu2025,Mazurenko2017,Shao2024,Chalopin2024}. 
+Moreover, recent theoretical advances have established the universality of globally driven analog quantum systems \cite{Hu2025}. 
+Despite this progress, the Eastin-Knill theorem suggests a fundamental tension between continuous symmetries, which are ubiquitous in analog systems, and exact quantum error correction. Therefore, how to achieve robustness in analog quantum systems and their applications remains largely open.
+
+One promising approach to circumvent the Eastin--Knill constraint is to relax the requirement of exact error correction and consider approximate quantum error correction (AQEC)~\cite{Beny2010}. 
+Within this framework, covariant codes can support continuous groups of transversal logical operations at the cost of a controlled approximation error. 
+A sequence of works has established quantitative trade-offs between covariance and correctability, deriving information-theoretic lower bounds on the worst-case infidelity of covariant codes under erasure noise~\cite{Faist2020,Zhou2021,Faist2023,Kong2022,Yang2022}. 
+Existing constructions based on symmetric random codes achieve near-optimal scaling, and explicit examples of $U(1)$-covariant codes have demonstrated advantages for quantum metrology. 
+However, explicit constructions for non-Abelian symmetries, such as $\mathrm{SU}(d)$, remain open. Typically, the previous constructions also require the local physical dimension to grow with the logical dimension \elo{should mention that ~\cite{Kong2022} is randomised and ~\cite{Yang2022} randomised and uses additional ancillas}.
+
+In this work, we develop a unified framework for constructing covariant quantum codes for general continuous symmetry groups. Exploiting the fact that the encoding map is an intertwiner, we show that the code space must lie inside the isotypic component of the physical representation corresponding to the logical irrep. Consequently, constructing a covariant code reduces to selecting a multiplicity vector in the associated multiplicity space, which can then be tailored to satisfy additional operational requirements. For erasure noise, using the dual-channel formalism, we relate the relevant error channel to reduced states on the erased subsystems and show that covariance constrains these reduced states to retain the encoded logical structure up to a small non-chaotic component. This is done by choosing the multiplicity vector to impose suitable permutation symmetries—cyclic symmetry for single-qudit erasures, and higher transitivity conditions for two- and three-qudit erasures.
+Using this insights, we construct explicit $\mathrm{SU}(d)$-covariant codes that achieve worst-case purified distances $\Theta(1/N)$ under single-site erasure noise, saturating known lower bounds up to constant factors~\cite{Faist2020,Zhou2021}. 
+In this way, representation theory and covariance allow us to explicitly construct and characterize the code, and we further obtain an explicit covariant decoder via the Petz map.
+
+As an application, we introduce a framework for \emph{robust covariant analog simulation} \elo{robust/fault-tolerant or maybe say smth about path to fault-tolerant}. 
+Given a target Hamiltonian with dynamical Lie algebra (DLA) decomposition 
+$\langle H_1,H_2,\dots\rangle_{\mathrm{Lie}}$, we identify invariant Lie subalgebra $\mathfrak{su}(d_1)\oplus \mathfrak{su}(d_2)\oplus \cdots$, which contains the DLA of the system, and 
+we encode each sector using a corresponding $SU(d_i)$-covariant code, enabling robust analog evolution with fully \emph{transversal} and \emph{continuous} operations. Our explicit construction and analysis of reduced states also allows us to characterize inter-block erasures in $\mathfrak{su}(d_1)\oplus \mathfrak{su}(d_2)$-covariant block encodings. In particular, we show that this blockwise architecture remains naturally robust under correlated erasures acting across different blocks. Although approximate quantum error-correcting codes do not admit a direct analogy of code distance, this behavior may be viewed as an approximate counterpart to the familiar fact that tensor products of stabilizer codes preserve distance.
+Overall, our construction naturally interfaces with globally controlled platforms such as neutral atom arrays. 
+Finally, for the invariant algebra, we also give a sufficient criterion for identifying symmetry-breaking Hamiltonians that extend the encoded dynamics to universal quantum computation. In the setting of $\oplus_i \mathfrak{su}(d_i)$-covariant codes, these symmetry-breaking terms play the role of resource operations. We comment on trade-offs between encoding rate and resource symmetry-breaking Hamiltonians that we need for universality.
+
+% \textit{Introduction.---} Quantum error correction is essential for scalable quantum computation, 
+% yet the structure of physically realizable error-correcting codes 
+% is fundamentally constrained by symmetry.
+% The Eastin-Knill theorem~\cite{Eastin2009} establishes 
+% that no finite-dimensional quantum error-correcting code 
+% can admit a universal set of transversal logical gates: 
+% the group of transversal logical operations is necessarily finite.
+% Therefore, exact quantum error correction codes cannot be covariant under any continuous symmetry group. Over the past years, there have been tramendeous process made on quantum error correction with digital quantum computers, where there are proposals with quantum low-density-parity-check codes with ultra-high encoding rates. Several experiments have demonstrated break-even performance on logical quantum memory, where more physical qubits lead to lower logical errors. However, there is still progress that needs to be made to demonstrate break-even performance at the quantum algorithmic level.
+% On the other hand, analog quantum devices and their applications are still one of the flagships of quantum technology. In quantum simulation, people have demonstrated ultra-low temperature quantum state preparation of the Fermi-Hubbard model, which is challenging for tensor networks. Recent works have also established the universality of globally driven analog quantum systems. However, due to the Eastin-Knill theorem, the analog quantum devices seem incompatible with quantum error correction and how to make those analog quantum devices more robust is unclear.
+
+% One strategy for circumventing the Eastin-Knill theorem 
+% is to relax the requirement of exact error correction 
+% and work with approximate quantum error correction (AQEC)~\cite{Beny2010}. In AQEC, one can design covariant codes that exhibit transversal physical operations with continuous groups at the cost of a residual but controllable error. The quantitative trade-off between covariance and correctability 
+% has been explored in a series of works
+% establishing information-theoretic lower bounds 
+% on the worst-case infidelity of covariant codes
+% under erasure noise~\cite{Faist2020, Zhou2021, Faist2023, Kong2022, Yang2022}.
+% In several seminal works, people have shown that AQEC constructions based on random unitaries with symmetries achieve near-optimal error suppression scaling and have also explicitly designed U(1) covariant codes with metrological advantages. However, there are no explicit covariant codes for non-abelian symmetries, such as SU($d$), which is crucial for robust applications with analog quantum devices, and existing constructions usually require that the physical sub-system dimensions grow with the logical dimensions.
+
+% In this work, we address these questions by developing a unified framework to design covariant codes for different continuous symmetry groups and show that the code design is equivalent to identifying the code space within the multiplicity space of the fundamental representation. Using this insight, we explicitly construct SU($d$)-covariant codes with worst-case infidelity $\Theta(1/N)$ under single-site erasure noise, which saturates the known lower bounds up to constants~\cite{Faist2020, Zhou2021}. In addition, we also discuss the Petz map recovery of those codes. Futhermore, we generalize the analysis to multi-qubit erasure noise. As an application, we propose the covariant analog simulation framework. For simulating a target Hamiltonian dynamics, we decompose the dynamical Lie algebra of the target Hamiltonian into the direct sum of their irreducible representations, i.e. $\mathrm{\langle H_1,H_2,\dots\rangle_{\mathrm{Lie}}}=\mathfrak{su}(d_1)\oplus \mathfrak{su}(d_2)\oplus \dots$. Then we use the covariant encoding scheme for each $\mathfrak{su}(d_i)$ to make it robust. In the covariant analog simulation encoding, every elements are operated in a transversal way and there is no need to let them interact with each other. This proposal could be nice to implement with globally controlled systems, such as neutral atoms. In the end, we also discuss its connection to universal analog quantum computation. Interestingly, the symmetry breaking Hamiltonians in the analog quantum system serves as a resource operation that cannot be transversally implemented.
+
+\textit{AQECC.---} Crucial to analysis of AQECC is entanglment fidelity, defined as   
+\[
+    F(\mathcal{N}, \mathcal{M})=\min _\rho f((\mathcal{N} \otimes \mathrm{id})(|\psi_{\rho}\rangle\langle\psi_{\rho}|),(\mathcal{M} \otimes \mathrm{id})(|\psi_{\rho}\rangle\langle\psi_{\rho}|)),
+\]
+where $f(\rho, \sigma)=\operatorname{Tr} \sqrt{\sqrt{\rho} \sigma \sqrt{\rho}}$ and $\ket{\psi_{\rho}}$ is purification of state $\rho$. We will consider the Bures distance, based on entanglement fidelity
+\[
+    d(\mathcal{N}, \mathcal{M}):=\sqrt{1-F(\mathcal{N}, \mathcal{M})}.
+\]
+In our setting we will compare $\mathcal{R}\circ\mathcal{N}\circ\mathcal{E}$ to $\mathrm{id}$, where $\mathcal{R}$ is a recovery channel, $N$ is a noise channel and $\mathcal{E}$ is an encoding isometry.
+Namely, we will call a code characterized by the encoding map $\mathcal{E}$ is $\varepsilon$-correctable under the noise channel $\mathcal{N}$ \cite{Beny2010}, if there exists a recovery channel $\mathcal{R}$ such that $d(\mathcal{R} \mathcal{N} \mathcal{E}, \mathrm{id}) \leq \varepsilon$.\\
+\textit{Dual channel.---} Instead of building our analysis on constructing a near optimal recovery map, we will exploit so-called dual channel formalism, developed in \cite{Beny2010}. For channel $\Phi$ we write Stienspring dilation in the form
+\[
+    \Phi(\sigma)=\operatorname{Tr}_E\left(V \sigma V^{\dagger}\right), \quad V|\phi\rangle:=U(|\phi\rangle \otimes|\psi\rangle)
+\]
+where $V: \mathcal{H}_A \rightarrow \mathcal{H}_B \otimes \mathcal{H}_E$. From this we define a \textit{dual or complementary channel}
+\[
+    \widehat{\Phi}(\sigma)=\operatorname{Tr}_B\left(V \sigma V^{\dagger}\right).
+\]
+Intuitively, the dual channel tracks the information leaked to the environment during a quantum process.
+
+The dual channel representation gives an equivalent quantitative characterization of AQECC. Namely, encoding map $\mathcal{E}$ is $\varepsilon$-correctable under noise channel $\mathcal{N}$ iff there exists a state $\rho_0$ such that $d(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda) \leq \varepsilon$, where $\Lambda$ is defined as $\Lambda(\rho)=\sum_{i j} \lambda_{i j} \operatorname{Tr}(\rho)|i\rangle\langle j|$ with $\lambda_{i j}=\langle i| \rho_0|j\rangle$.\\
+\textit{Noise models.---} 
+In our derivations, we will use standard subsystem erasure channel with orthogonal erasure states $\{\ket{e}_{A_{\alpha}}\}$, i. e.
+\[
+    \mathcal{N}(\sigma)=\sum_{\alpha} p_{A_{\alpha}}|{e}\rangle\left\langle\left. {e}\right|_{A_{\alpha}}\right.\otimes \operatorname{Tr}_{A_{\alpha}}(\sigma),
+\]
+where $\alpha$ is index enumerating subsystems $\{A_{\alpha}\}$.It was established in \cite{Faist2020}, that corresponding dual channels are
+\[
+\begin{gathered}
+    \widehat{\mathcal{N}\circ \mathcal{E}}\left(\sigma\right)=\sum_{\alpha} p_{\alpha}|\alpha\rangle\left\langle\left. \alpha\right|_C \otimes \operatorname{Tr}_{\bar{A_{\alpha}}}\left(V\sigma V^{\dagger}\right) .\right.
+\end{gathered}
+\]
+where $V$ is an encoding isometry $\mathcal{E}$ in a fixed basis.\\
+\textit{Covariant encoding.---}
+Let $G$ be a compact connected Lie group. We are interested in a specific type of AQECCs, namely in AQECCs that have a continuous group of transversal gates. We say that an encoding map $\mathcal{E}: \mathcal{H}_L \to \mathcal{H}_P$ is \textit{covariant} with respect to $G$ if for every $g \in G$, there exist unitary representations $U_P(g)$, $U_L(g)$ on the physical and logical Hilbert spaces $\mathcal{H}_P$ and $\mathcal{H}_L$ respectively such that
+\[
+    \mathcal{E} \circ U_L(g) = U_P(g) \circ \mathcal{E}, \quad \forall g\in G.
+\]
+There is an equivalent way of writing the covariance condition in terms of Lie algebra $\mathfrak{g}$ of $G$, i. e.
+\[
+    \mathcal{E} \circ \rho_L(X) = \rho_P(X) \circ \mathcal{E}, \quad \forall X\in \mathfrak{g}, 
+\]
+where $\rho_L$ and $\rho_P$ are the representations of $\mathfrak{g}$ corresponding to $U_L$ and $U_P$.
+
+Representation $U_P$ can be quite general, but we are interested in transversal encoding, so we will consider the case when $U_P(g) = \bigotimes_{i=1}^N U_i(g)$, where $U_i$ is a representation of $G$ on the $i$-th physical qudit (or 
+equivalently $\rho_P(X) = \sum_{i=1}^N \rho_i(X)$). We will also take $U_i$ to be identical and irreducible for each $i$ and and $U_L$ to be fundamental.
+
+Our Lie group of interest will be $SU(d)$ (we are interested in analog, namely, continuous evolution after all) and for $SU(d)$-covariant codes construction it is not crucial whether to build it in terms of Lie groups of Lie algebras (representations are the same). However, ones we approach quantum simulations it will be advategeos to consider covariant encoding from Lie algebras point of view, since Dynamical Lie algebra is a crucial object in analog computation. To emphasize it we will use notation "$\mathfrak{su}(d_1)\oplus\mathfrak{su}(d_2)\oplus...$-covariant encoding".
+
+\textit{Encoding map as an intertwiner operator.---} 
+%\begin{itemize}
+%    \item we can talk about Shur's lemma and its constraints on the encoding map.
+%    \item then we can talk about fidelity calculation briefly (some details can be put into End Matter)
+%    \item then discuss choosing multiplicity space as eigenspace of translational operator, and show the fidelity bound.
+%\end{itemize}
+How much freedom remains in the choice of code space? Since SU(d) is a large continuous symmetry group, the covariance condition ?? imposes strong constraints. In fact, condition ?? identifies the encoding map as an intertwiner. Decomposing the physical Hilbert space into irreducible $SU(d)$-representations, i. e. 
+\[
+    \mathcal{H}_P\cong \bigoplus_{\lambda\in \Lambda}V_{\lambda}\otimes M_{\lambda},
+\]
+where $\Lambda$ is a set of all iireps of $SU(d)$,
+and noting that the logical space $\mathcal{H}_L$ carries the fundamental representation, it follows that the image of the encoding map must lie inside the corresponding isotypic component $V_{\omega_1}\otimes M_{\omega_1}$ of the physical space. Consequently, the construction of the code space reduces to the choice of a multiplicity vector $\ket{m_{\omega_1}}$ in the associated multiplicity space $M_{\omega_1}$. By choosing the multiplicity vector $\ket{m_{\omega_1}}$ appropriately, one can tune the properties of the resulting covariant code. In this work, we show that a suitable choice of $\ket{m_{\omega_1}}$ yields covariant encodings
+\[
+    V: \mathcal{H}_L\rightarrow V_{\omega_1}\otimes \ket{m_{\omega_1}} \subseteq \mathcal{H}_P,
+\]
+where we recall that $\mathcal{H}_L\cong V_{\omega_1}$, with strong performance as approximate quantum error-correcting codes. It is important to note that this construction is meaningful only when the fundamental isotypic component is actually present in the physical representation, i.e. when $\operatorname{dim}(M_{\lambda})>0$. We return to this point in more detail below.
+
+\textit{SU(2) covariant codes.---} 
+Let $V_j$ be a spin-$j$ representation. We consider $\mathcal{H}_L=V_{1/2}\cong\mathbb{C}^2$ and $\mathcal{H}_P=(V_{j})^{\otimes n}$ with $n$ odd and $j$ half integer, where representation is defined
+as
+\[
+\begin{gathered}
+\frac{i \sigma_x}{2} \rightarrow i J_x \equiv \sum_{k=1}^n i J_x^{(k)}, \quad \frac{i \sigma_y}{2} \rightarrow i J_y \equiv \sum_{k=1}^n i J_y^{(k)}, \\\frac{i \sigma_z}{2} \rightarrow i J_z \equiv \sum_{k=1}^n i J_z^{(k)},
+\end{gathered}
+\]
+where $J_x^{(i)}, J_y^{(i)}, J_z^{(i)}$ are the spin-$j$ operators on the $i$-th physical qudit. This choice of parameters $n$ and $j$ guaranties that $\operatorname{dim}M_{V_{1/2}}>0$ (in fact $\operatorname{dim}M_{V_{1/2}}>0$ iff $n\equiv 1 (\operatorname{mod} 2), j\in \frac{1}{2}+\mathbb{Z}$).
+
+There are two reasons for treating the $SU(2)$ case separately. First, it provides a physically familiar setting in which the general method can be presented in concrete terms. Second, in this case we are able to give a complete analysis of all instances in which the fundamental representation appears in the physical Hilbert space.
+
+If we consider single qudit unflagged erasure noise, from ?? it is apparent that we should find reduced state for each physical qudit.
+Turns out, that if we consider Bloch parametrization of logical state $\rho_L=\frac{1}{2}(I+\mathbf{r} \cdot \boldsymbol{\sigma})$, then reduced state on $i$-th physical qudit will take a form
+\[
+    \rho^{(i)}\left(\rho_L\right)=\frac{I_{V_j}}{2 j+1}+\frac{3\alpha_i}{2 j(j+1)(2 j+1)} \sum_a r_a J_a^{(i)}, \quad i=\bar{1, n},
+\]
+where we denoted $\rho^{(i)}\left(\rho_L\right):=\operatorname{Tr}_{\bar{i}}(V\rho_L V^{\dagger})$ and $\{\alpha_i\geq0\}$ are s. t. $\sum_{i=1}^n\alpha_i=1$, which we will comment on in a moment. As pointed out above, condition ?? does not uniquely determine the code space; rather, it reduces the problem to the choice of a multiplicity vector. Remarkably, the reduced-state formula ?? holds for every covariant encoding with fixed logical and physical representations in the sense described above, and the dependence on the chosen code space enters only through the coefficients $\alpha_i$. This has two main reasons. First, the reduced channel $\rho^{(i)}$ is itself covariant in the sense of
+\[
+    \rho_i\left(u_g \rho_L u_g^{\dagger}\right)=U_g^{(i)} \rho_i\left(\rho_L\right)\left(U_g^{(i)}\right)^{\dagger},
+\]
+and one therefore expects on representation-theoretic grounds that the reduced state should retain the same structural form as the logical input state. Second, the code construction implies $V^{\dagger} \sum_{i=1}^nJ_a^{(i)} V=\frac{\sigma_a}{2}$, so it is natural to ask how local one-body operators act on the code space. In fact, one finds
+
+$$
+V^{\dagger} J_a^{(i)} V=\alpha_i \frac{\sigma_a}{2},
+$$
+
+a relation that again follows from the covariance of the encoding isometry $V$ (note, that unlike the total generators $\sum_i J_a^{(i)}$, the local operators $J_a^{(i)}$ do not preserve the code space).
+
+Naturally, in order to preserve logical information, one would like the states accessible to the environment to become as close as possible to the chaotic state in the large- $n$ limit, so that the environment cannot reliably distinguish between them. Since the reduced state has the specific form ??, the remaining design freedom is essentially the choice of the coefficients $\alpha_i$, equivalently the choice of code space, or of the corresponding multiplicity vector. The ideal situation is to make all $\alpha_i$ equal, in which case the normalization condition $\sum_i \alpha_i=1$ immediately gives $\alpha_i=1 / n$. This can be achieved by choosing the multiplicity vector $\ket{m}$ to be an eigenvector of the cyclic shift operator $s\in C_n\subseteq S_n$. Indeed, the cyclic shift acts on the physical qudits as in $s\cdot \ket{i_1, i_2, \dots , i_n}=\ket{i_{n}, i_1 \dots , i_{n-1}}$, and induces a corresponding action on local operators $s J_a^{(i)} s^{\dagger}=J_a^{(i+1)}$. By Schur-Weyl duality, this action is trivial on the $SU(d)$-irrep factor in the decomposition $V_{1/2}\otimes \ket{m}$, so that one obtains 
+\[
+    V^{\dagger} J_a^{(i+1)} V=V^{\dagger} s J_a^{(i)} s^{\dagger} V=V^{\dagger} J_a^{(i)} V.
+\]
+Combined with identity ??, this immediately implies that all coefficients $\alpha_i$ are equal.
+
+Even before evaluating the fidelity in ?? -- which is, of course, our ultimate goal and the reason for computing the reduced states in the first place -- the structure of the reduced state $\rho^{(i)}(\rho_L)=\frac{I_{V_j}}{2 j+1}+\frac{1}{n}(...)$ already strongly suggests that our codes perform well under single-qudit erasure noise. Indeed, in the large-n limit, the one-qudit states accessible to the environment become asymptotically close to the chaotic state. 
+
+Notice, that with this choice of code space all reduced state are equal $\rho^{(i)}(\rho_L)\equiv \sigma(\rho_L)$ for each site $i$. This means that complementary channel doesn't depend on input classical distribution $\{p_i\}_{i=1}^n$
+\[
+    \widehat{\mathcal{N}\circ \mathcal{E}}(\rho_L)=\sum_{i=1}^n p_i \rho^{(i)}(\rho_L)=\sigma(\rho_L).
+\]
+
+This intuition turns out to be correct by direct calculation of entanglement fidelity
+\[
+    F(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda)=1-\frac{3}{32j^2(j+1)^2(2j+1)^{\frac{1}{2}}}\frac{1}{n^2}\ +O\left(\frac{1}{n^3}\right),
+\]
+where we chose $\Lambda$ to be chaotic state $\frac{I_{V_j}}{2 j+1}$.\\
+\textit{SU(d) covariant codes.---} 
+%\begin{itemize}
+%    \item we can generalize the previous idea to general non-Abelian SU($d$) group, maybe state the general Theorem here.
+%    \item Fidelity calculation
+%    \item explicity decoder construction
+%\end{itemize}
+Now we construct $SU(d)$-covariant codes. We define physical representation in the following way
+\[
+    t_a \rightarrow T_a \equiv \sum_{i=1}^n T_a^{(i)},
+\]
+where $\{t_a\}_{a=1}^{d^2-1}$ are standard Hermitian traceless generators of fundamental representation of $SU(d)$ on logical space and $\{T_a^{(i)}\}_{a=1}^{d^2-1}$ are their representation on $i$-th physical qudit. As in the case $SU(2)$ we have to make sure, that we have $V_{\omega_1}$ isotipic component inside physical representation $\mathcal{H}_P$. That is why we take $V_{\lambda}=V_{\omega_r}$, with $nr\equiv 1\;(\operatorname{mod} d)$, which is sufficient (but not necessary).
+
+Using generalised Bloch parametrisation of logical state $\rho_L=\frac{I}{d}+\left(\rho_L-\frac{I}{d}\right)=\frac{I}{d}+\sum_a r_a t_a$ and the same representation theoretic methods as in $SU(2)$ case, we get the following form of reduced state
+\[
+    \rho^{(i)}\left(\rho_L\right) = \frac{I}{\operatorname{dim} V_\lambda}+\frac{\alpha_i}{2 \kappa_{\omega_r}} \sum_a r_a T_a^{(i)},
+\]
+where, $\{\alpha_i\geq 0\}$ s. t. $\sum_i\alpha_i=1$. Again, multiplicity vector $\ket{m}$ can be chosen to be eigen vector of cyclic shift so that the code space $V_{\omega_1}\otimes \ket{m}$ is invariant under cyclic permutations, making $\alpha_i=\frac{1}{n}$.
+
+Explicit calculations of fidelity give
+\[
+    F(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda)=1-\frac{D^2 }{32 d\kappa_{\omega_r}}\left(r(d-r+1)-\frac{r^2}{d}\right)\frac{1}{n^2}+O\left(\frac{1}{n^3}\right),
+\]
+where we chose $\Lambda$ to be chaotic state $\frac{I}{\operatorname{dim} V_\lambda}$.\\
+\textit{Decoder map.---}
+We construct an explicit recovery map via the transpose channel (a.k.a. Petz recovery map)
+\[
+    \mathcal{R}_{\mathrm{Petz}}(X)=V^{\dagger}\left(A^{-1 / 2} X A^{-1 / 2} \otimes I_W\right) V,
+\]
+where $A:=\operatorname{Tr}_n\left(V V^{\dagger}\right)$. Using the fact that the transpose channel is a near-optimal channel and that the distance of the optimal channel is at least as good as the distance of ??, we get
+\[
+    d(\mathcal{R}_{\mathrm{Petz}}\circ \mathcal{N}\circ \mathcal{E})=O\left(n^{-2}\right).
+\]
+\textit{Multi-site erasure errors.---} 
+As in the single-qudit erasure case, the analysis of $k$-qudit erasures reduces to the study of the corresponding $k$-qudit reduced state $\rho^{[i]}(\rho_L)$, where $[i]:=(i_1, ..., i_k)$. Since this reduced-state map -- equivalently, the complementary channel for our noise model -- is itself covariant, one expects the reduced physical state to admit a universal representation-theoretic form, independent of the particular code space. The dependence on the chosen code space, or equivalently on the multiplicity vector, should then enter only through the coefficients appearing in this expansion. At the same time, the $k$-qudit case is naturally more restrictive than the single-qudit case, suggesting that the multiplicity vector $\ket{m}\in M_{\omega_{1}}$, and, thus, code space $V_{\omega_1}\otimes \ket{m}$, should be chosen to be invariant under a sufficiently large symmetry group -- cyclic shift $C_n$ will not be enough. 
+
+It is natural to suggest that the full symmetric group $S_n$ should be large enough to achieve this: it would certainly force all reduced states $\rho^{[i]}$ to coincide, or equivalently all coefficients to be equal and uniform, which would likely make the reduced state asymptotically close to the chaotic state as $n \rightarrow \infty$. However, it turns out that the action of $S_n$ is too restrictive: the multiplicity space $M_{\omega_1}$, in which we seek the multiplicity vectors defining the code space, does not contain a nontrivial $S_n$-invariant vector.
+
+The appropriate symmetry group should satisfy two competing requirements: it must be sufficiently large to enforce equality of the reduced states $\rho^{[i]}$, yet sufficiently small to admit a nontrivial invariant subspace in $M_{\omega_1}$. The first requirement is met by choosing a subgroup $G \subseteq S_n$ that is $k$-transitive, meaning that for any two ordered $k$-tuples of distinct indices $\left(i_1, \ldots, i_k\right)$ and $\left(j_1, \ldots, j_k\right)$, there exists $g \in G$ such that $g\left(i_1, \ldots, i_k\right)=\left(j_1, \ldots, j_k\right)$. It turns out that proper$k$-transitive subgroups exist only for $k=2$ and $k=3$, namely the affine group on $\mathbb{F}_n$ and the Möbius transformation group on $\mathbb{F}_n$, respectively. The second requirement is analyzed for these groups in detail in the appendix.
+
+This is why, in the present work, we restrict our analysis to noise affecting at most three qudits. The absence of suitable symmetry groups beyond this range does not, however, imply that good codes for $k$-qudit noise cannot exist in principle. The requirement that all reduced states coincide -- equivalently, that the associated coefficients be uniform -- is only a sufficient condition for good performance, not a necessary one.
+
+Three-qudit reduced state is
+\[
+    \rho_{ijk}(\rho_L)-\rho_{ijk}(I_d/d)
+    =
+    \frac{1}{nd^2}\sum_{p\in\{i,j,k\}}\sum_a r_a\, t_a^{(p)}
+    +O\!\left(\frac1{n^2}\right),
+\]
+where $\rho_{ijk}(I_d/d)$ is a constant state independent of an input, and $O\!\left(\frac1{n^2}\right)$ contains two-body and three body operators.
+
+Fidelity is given by
+\[
+    F(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda)=1-\frac{3\left(d^2-1\right)}{n^2}+O\left(n^{-3}\right),
+\]
+where we chose $\Lambda=\rho_{ijk}(I_d/d)$.\\
+\textit{Lower bounds.---}\\
+\textit{Covariant analog simulations.---} 
+We consider a quantum system consisting of $N$ qubits. The Hilbert space is $\mathcal{H} = (\mathbb{C}^2)^{\otimes N}$, with complex dimension $d = 2^N$. The evolution of the system is governed by the Schrödinger equation with a time-dependent Hamiltonian:
+$$
+    H(t) = H_{\mathrm{drift}} + \sum_{j=1}^k u_j(t) H_j,
+$$
+where $H_{\mathrm{drift}}$ is the intrinsic Hamiltonian, $\{H_j\}$ are the control Hamiltonians, and $u_j(t) \in \mathbb{R}$ are tunable control fields.
+
+The set of all unitary transformations reachable by the system is determined by the \textit{Dynamical Lie Algebra} (DLA), generated by the skew-Hermitian operators corresponding to the Hamiltonians, i. e.
+\begin{equation}
+    \mathcal{L} = \mathrm{Lie}_{\mathbb{R}} \{ iH_0, iH_1, \dots, iH_k \} \subseteq \mathfrak{u}(\mathcal{H}).
+\end{equation}
+We can't say much about $\mathcal{L}$ in general without specific information about the Hamiltonians. Nevertheless, in various physical settings, we encounter DLA, that can at least be embedded into $\mathfrak{s} \mathfrak{u}\left(d_1\right) \oplus \ldots \oplus \mathfrak{s} \mathfrak{u}\left(d_k\right) \oplus \mathfrak{u}(1)^{\oplus(r-1)}$.
+
+There is a natural action of finite group $G$ (which is considered as subgroup of $S_N$) on $\HH$ by permuting physical sites, i. e.
+\[
+    g\cdot \ket{i_1}\otimes...\otimes\ket{i_N}=\ket{i_{g^{-1}(1)}}\otimes...\otimes\ket{i_{g^{-1}(N)}}.
+\]
+(We emphasize that, at this stage, the symmetry group acts on the logical space. It is therefore conceptually distinct from the finite group considered earlier, which acted on the physical space in order to impose symmetry constraints on the code space. The two groups play different roles and should not be confused.)
+
+This action defines a representation of $G$ on $\mathcal{H}$, which we denote as $U(g), \forall g\in G$ to emphasize that it is a unitary representation. 
+We also have a natural induced action, and thus -- representation, of $G$ on $\mathfrak{su}(\mathcal{H})$, defined by
+\[
+    \Theta_g(X):=U(g) X U(g)^{\dagger}, \quad \text { for } X \in \mathfrak{su}(\mathcal{H}).
+\]
+
+We define the \textit{invariant Lie subalgebra} as
+\begin{equation}
+    \mathfrak{su}^G(\mathcal{H}) := \{ X \in \mathfrak{su}(\mathcal{H}) : \Theta_g(X) = X, \forall g \in G \}\subseteq \mathfrak{su}(\mathcal{H}),
+\end{equation}
+
+So where does a finite group $G$ come from? Usually, it is a symmetry group,
+corresponding to permutation of physical sites, under which Hamiltonians of the system
+stay invariant. For example, if we have Ising chain, then it's symmetry group is $\mathbb{Z}_2$.
+Even more general, if our system has Hamiltonian of the form
+\[
+    H_x=\sum_{i=1}^N X_i, \quad H_z=\sum_{i=1}^N Z_i, \quad H_{zz}=\sum_{(i, j)\in \Gamma} Z_i Z_{j},
+\]
+where $\Gamma$ is so-called interaction graph, then the symmetry group of this system is the automorphism group of $\Gamma$.
+For example, if $\Gamma$ is a complete graph, then the symmetry group is $S_N$, and if $\Gamma$ is a cycle graph, then the symmetry group is $D_N$.
+
+Thus, in our setting system Hamiltonians are invariant under the action of $G$, which means that they lie in $\mathfrak{su}^G(\mathcal{H})$, which leads to their DLA being a subalgebra of $\mathfrak{su}^G(\mathcal{H})$, i. e.
+\[
+    \langle H_0, H_1, ..., H_k \rangle_{\text{Lie}} \subseteq \mathfrak{su}^G(\mathcal{H}),
+\]
+It's obvious now that it is advantageous to study $\mathfrak{su}^G(\mathcal{H})$ Lie algebra.
+As we prove in \ref{prop:su_isotipic_dec}, $\mathfrak{su}^G(\mathcal{H})$ is semisimple and has the following decomposition
+\[
+    \mathfrak{su}^G(\mathcal{H})\cong \mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}.
+\]
+If we want to simulate this system fault-tolerantly, we can
+just use our $\mathfrak{su}(\mathcal{H})$ covariant encoding. However, one can see that such incoding is quite redandent -- in general
+case the set of all reachable Hamiltonians (DLA) forms subalgebra of $\mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$,
+so construction of $\mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$ will be enough to simulate the system, and, as we will 
+show below, it can be done in a natural way, using block-encoding approach.
+
+Let us know formalise this approach. First, lets describe the $\mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$-covariant encoding
+The idea is simple: we make $\mathfrak{su}(d_i)$-covarinat encoding 
+(in a sense from previous sections) into $i$-th block of $n_i$ qudits (each individual physical qudit is irrep of $\mathfrak{su}(d_i)$ or representation of $\mathfrak{u}(1)$ again in a sense described earlier).
+
+Now, let's go back and discuss the nature of coefficients $d_i$ and $r$. From the proof of proposition \ref{prop:su_isotipic_dec} it is clear
+that $d_i$ are enumerated by the set of irreps of $G$ that appear in the decomposition of representation of $G$ on $\mathcal{H}$, and their values
+are exactly the dimensions of multiplicity spaces of corresponding irreps. As for $r$, it is the number of irreps of $G$ that appear in $\mathcal{H}$.
+From now on we will use the following notation $d_i:= m_i, r:=|\Lambda|$. In lemma \ref{lem:Sn_irrep_multiplicity} we show that the sum of multiplicity 
+spaces dimensions for this specific representation of $S_n$ is exactly $\left\lfloor\frac{(n+2)^2}{4}\right\rfloor$,
+so the dimension of Lie algebra $\mathfrak{su}(\mathcal{H})^G$ is polynomial in $n$, while the dimension of $\mathfrak{su}(\mathcal{H})$ with $\operatorname{dim}(\mathcal{H})=2^n$ is exponential in $n$.  As for other groups, i. e. subgroups of $S_n$, it turns out that the sum of multiplicity spaces dimensions for them
+is bounded from below by $\left\lfloor\frac{(n+2)^2}{4}\right\rfloor$ (we show that in lemma \ref{lem:G_irrep_multiplicity}), 
+and for abelian cases it is exactly $2^n$ (which follows from corollary \ref{cor:abelian_irrep_multiplicity}), 
+so for abelian groups we don't have any reduction in dimension of Lie algebra, that
+we want to encode covariantly. We make a table of famous quantum systems and 
+their symmetry groups, and corresponding dimensions of Lie algebras.
+
+Now let's discuss code performance under erasure noise. It is fairly obvious, that if we consider noise model of the form $\mathcal{N}=\bigotimes_{i=1}^{2|\Lambda|-1}\mathcal{N}_i$ for the $\mathfrak{s} \mathfrak{u}\left(m_1\right) \oplus \ldots \oplus \mathfrak{s} \mathfrak{u}\left(m_{|\Lambda|}\right) \oplus \mathfrak{u}(1)^{\oplus(|\Lambda|-1)}$-covarinat
+block-code that we constructed in previous section, where $\mathcal{N}_i$ is a flagged version of erasure channel described in sections ??
+However, this noise model doesn't take into account inter-block correlated erasure 
+errors.
+
+From now on in this section we will focuse on flagged $2$-qubit erasure errors. We will consider $\mathfrak{su}(d_1)\oplus\mathfrak{su}(d_2)$-covariant
+block encoding, where $d_1$ and $d_2$ are arbitrary (and not necessarily equal), each of two blocks consists of $n_i$ qudits correspondingly, and
+each qudit is a fundumental representation of corresponding $\mathfrak{su}(d_i)$, so resulting physical space is $(\mathbb{C}^{d_1})^{\otimes n_1}\otimes (\mathbb{C}^{d_2})^{\otimes n_2}$ (also $n_1$ and $n_2$
+satisfy conditions from proposition ??, but it will not be important here, we will only use the fact that $n_i$ can be arbitrary large). 
+For each block we fix multiplicity vector in a way described in ??, so that reduced $2$-qubit states are the same inside each block (see detailes below).
+Instead of generalised bloch parameterisation of logical states, we will use the following representation, that respect block structure of our problem
+\[
+\begin{aligned}
+    \rho_L=\frac{I}{d_1 d_2}+\frac{1}{d_2} \sum_a r_a^{(1)} \bar{t}_a \otimes I+&\frac{1}{d_1} \sum_b r_b^{(2)} I \otimes \bar{s}_b+\\&+\sum_{a, b} T_{a b} \bar{t}_a \otimes \bar{s}_b,
+\end{aligned}
+\]
+where $\bar{t}_a$ and $\bar{s}_b$ are generators of $\mathfrak{su}(d_1)$ and $\mathfrak{su}(d_2)$ correspondingly, $r_a^{(1)}$ and $r_b^{(2)}$ are components of bloch vectors of reduced states on each block, and $T_{a b}$ is a correlation matrix.
+
+There is basically three types of the that environment "can see": in-block reduced two-qubit states (for each block different)
+\[
+\begin{aligned}
+    \rho_{1}^{\text {in }}(\rho_L)_{ij}=\frac{1}{d_1^2} \mathbf{1}-\frac{1}{d_1 n_1} \sum_{m=1}^{d_1^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_1 d_1} \sum_{b=1}^{d_1^2-1} r_b^{(1)}\left(t_b^{(i)}+t_b^{(j)}\right),\\
+    \rho_{2}^{\text {in }}(\rho_L)_{ij}=\frac{1}{d_2^2} \mathbf{1}-\frac{1}{d_2 n_2} \sum_{m=1}^{d_2^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_2 d_2} \sum_{b=1}^{d_2^2-1} r_b^{(2)}\left(t_b^{(i)}+t_b^{(j)}\right),
+\end{aligned}
+\]
+which we obtained by tracing out one qudit from the three-qudit reduced state $\rho_{i j k}$ obtained in ??. As for inter-block reduced two-qudit state we have
+\[
+\begin{aligned}
+    \rho^{\text {inter }}&=\frac{I}{d_1 d_2}+\frac{1}{n_1 d_2} \sum_a r_a^{(1)} t_a^{(i)} \otimes I+\frac{1}{n_2 d_1} \sum_b r_b^{(2)} I \otimes s_b^{(j)}+\\&+\frac{1}{n_1 n_2} \sum_{a, b} T_{a b} t_a^{(i)} \otimes s_b^{(j)}.    
+\end{aligned}
+\]
+In this notation dual channel becomes
+\[
+    \widehat{\mathcal{N} \circ \mathcal{E}}(\rho)=p_1\;\tau^{\text {in}}_1\otimes \rho^{\text {in }}_1 + p_2\;\tau^{\text {in}}_2\otimes \rho^{\text {in }}_2 + (1-p_1-p_2)\;\tau_{\text {inter }} \otimes \rho^{\text {inter }},
+\]
+where $\tau^{\text{in}}_1, \tau^{\text{in}}_2$ and $\tau_{\text{inter}}$ are some orthogonal flag states.
+
+Constant channel $\Lambda_*$ is defined as follows
+\[  
+    \Lambda_*(\rho)=\operatorname{tr}(\rho) \left(p_1\tau_1 \otimes \omega_1+p_2\tau_2 \otimes \omega_2+p_{12}\tau_{12} \otimes \omega_{12}\right),
+\]
+where
+\[
+\begin{gathered}
+    \omega_1:=\frac{I}{d_1^2}-\frac{1}{d_1 n_1} \sum_m t_m^{(i)} t_m^{(j)}, \quad \omega_2:=\frac{I}{d_2^2}-\frac{1}{d_2 n_2} \sum_m s_m^{(i)} s_m^{(j)}, \\ \omega_{12}:=\frac{I}{d_1 d_2}.
+\end{gathered}
+\]
+Explicit calculations show that entanglement fidelity is 
+\[
+\begin{aligned}
+        \mathcal{F}\left(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda_*\right)&=1-\frac{p_1\left(d_1^2-1\right)}{16 n_1^2}-\frac{p_2\left(d_2^2-1\right)}{16 n_2^2}-\\&-p_{12}\left(\frac{d_1^2-1}{32 n_1^2}+\frac{d_2^2-1}{32 n_2^2}\right)+O\left(n_1^{-2} n_2^{-2}+n_1^{-3}+n_2^{-3}\right).
+\end{aligned}
+\]
+
+
+\textit{Universal analog computations.---} 
+\hyh{I think this section can be brief, and most can be in the appendix, we just need to state main results here.}
+%\begin{itemize}
+%    \item we can talk about sufficient condition and symmetry breaking Hamiltonian 
+%    \item then we briefly can comment the symmetry breaking Hamiltonian is not transversal and acts like a resource.
+%\end{itemize}
+We first define what we mean by universal controllability of a quantum system in analog setting.
+The propagator $U(t)$ satisfies
+$$
+\dot{U}(t)=-i H(t) U(t), \quad U(0)=I .
+$$
+Then the system is unitarily controllable if for every target unitary $U_{\text {tar }} \in U(d)$ (or $S U(d)$, depending on whether global phase matters), there exists a finite time $T$ and controls $u_k(t)$ such that
+$$
+    U(T)=U_{\operatorname{tar}}
+$$
+(or $U(T)$ equals $U_{\text {tar }}$ up to a global phase).
+There is a well-known criterion for universal controllability in terms of the DLA: the system is universally controllable iff the dynamical Lie algebra
+    $$
+    \mathfrak{L}=\operatorname{Lie}\left\{i H_0, i H_1, \ldots, i H_m\right\}\cong
+    \mathfrak{u}(d) \quad \text { or } \quad \mathfrak{s} \mathfrak{u}(d) .
+    $$
+As was pointed out in the previous section, if the system has some symmetry, then the DLA of the system is a subalgebra
+of $\mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$,
+where decomposition is highly dependent on symmetry group and its representation on $\mathcal{H}$. 
+
+The natural question is whether we can achieve universality by adding some symmetry-breaking Hamiltonians to the set $\left\{i H_0, i H_1, \ldots, i H_m\right\}$?
+The answer is trivially yes -- we can just add all generators of $\mathfrak{su}(\mathcal{H})$,
+but ofcourse it is completely irrelevant from engineering point of view.
+
+So the real question is: what are the sufficient conditions on symmetry-breaking Hamiltonians to achieve universality?
+
+There are prior works establishing such conditions.
+In the following sections we provide a convinient sufficient for a set of symmetry-breaking Hamiltonians $\mathcal{G}_\text{br}$ to achieve universality.
+Our analysis highly relies on symmetry group $G$ and structure of its representation on $\HH$ and on Lie algebra itself.
+
+What would be the first step to implement a universal analog computation fault-tolerantly? 
+At first, we need a code that can correct errors from the noise model of the system. 
+Our $\mathfrak{su}(d)$-covariant codes are good candidates for this purpose, they have good AQEC properties 
+and have transversal implementation of $\mathfrak{su}(d)$. However,
+as we pointed out in previous section, such implementation
+can be quite costly in terms of number of physical qubits and from 
+egineering point of view it can be hard to scale such computations. 
+
+Instead, we can use $\mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$-covariant codes (with block-encoding approach).
+Hamiltonians which are invariant under symmetries of the system will be implemented transversally, and
+the set of breaking Hamiltonians $\mathcal{G}^{\text{br}}$ will become
+a \textit{resource set}, because they for these codes they will not be implemented transversally, 
+and thus they can be higly non-local and hard to implement.
+
+The real quetion is then becomes: how to choose decomposition $\mathfrak{su}^G\cong \mathfrak{su}(d_1)\oplus...\oplus\mathfrak{su}(d_k)\oplus \mathfrak{u}(1)^{\oplus(r-1)}$,
+or, equivalently, how to choose symmetry group $G$ in a way that the resulting code
+has as less physical qubits as possible (for fixed AQECC scaling) and at the same time the resulting resource set $\mathcal{G}^{\text{br}}$ 
+is, first, as small as possible (ideally, we want to have only one breaking Hamiltonian) and, second, as "good" as possible in a sense
+that it is not highly non-local and hard to implement. There is definetly 
+will be a trade offer between these goals, as we will show below.
+(Also, let's not forget that we have to find a set of Hamiltonians that are invariant under symmetries of the system and
+which DLA coincides with $\mathfrak{su}^G$).
+
+Let's say that we want to impose the largest group of symmetries possible, namely $S_n$. 
+As we discussed above, it minimises the dimension of Lie algebra $\mathfrak{su}^G$,
+making it polynomial in $n$, but at the same time, as we will show below for particular example, it makes the resource set $\mathcal{G}^{\text{br}}$ quite large.
+
+On the other hand, if we choose the smallest group of symmetries possible, namely $\mathbb{Z}_2$, then we have no reduction in dimension of Lie algebra $\mathfrak{su}^G$,
+however, we can achieve universality by adding only one breaking Hamiltonian see ??.
+
+\[
+\mathcal{L}:=\operatorname{Lie}\left(\mathfrak{su}^G(\mathcal{H}) \cup \mathcal{G}^{\text{br}}\right) \subseteq \mathfrak{su}(\mathcal{H}),
+\]
+
+
+% Codes covariant under continuous groups such as SU($d$) 
+% can then exist at the cost of a residual, but controllable, correction error.
+% The quantitative trade-off between covariance and correctability 
+% has been explored in a series of works
+% establishing information-theoretic lower bounds 
+% on the worst-case infidelity of covariant codes
+% under erasure noise~\cite{Faist2020, Zhou2021, Faist2023, Kong2022, Yang2022}.
+% Constructions based on random unitaries with symmetries 
+% have been shown to achieve near-optimal scaling~\cite{Kong2022},
+% and explicit codes with metrological advantages have been identified~\cite{Lin2025, Denys2024}.
+% However, existing explicit constructions 
+% either require physical subsystem dimensions that grow with the logical dimension 
+% or lack a clear connection to the native Hamiltonian structure 
+% of physical quantum simulators.
+ 
+% Independently, analog quantum simulation 
+% has emerged as a leading near-term approach 
+% to studying many-body quantum phenomena~\cite{Hu2025}.
+% In analog platforms such as Rydberg atom arrays, 
+% trapped ions, and superconducting circuits,
+% computation proceeds not through discrete gate sequences 
+% but through continuous-time evolution under controllable Hamiltonians.
+% The dynamical Lie algebra (DLA) generated by available Hamiltonians 
+% determines the set of reachable unitary operations~\cite{DLA_ref}
+% and thereby characterizes the computational power of the system.
+% Achieving universality in such platforms 
+% typically requires augmenting the native (symmetric) Hamiltonians 
+% with additional symmetry-breaking interactions.
+% A natural question arises: 
+% can covariant approximate error correction 
+% be adapted to protect analog quantum computations, 
+% where the ``easy'' operations form a continuous Lie group 
+% rather than a discrete gate set?
+ 
+% In this work we answer this question affirmatively 
+% by developing a unified framework 
+% that connects covariant AQECC with analog quantum simulation.
+% Our contributions are threefold.
+ 
+% \textit{(i) Explicit SU($d$)-covariant codes.}
+% We construct SU($d$)-covariant encodings 
+% of a $d$-dimensional logical system 
+% into $N$ copies of an irreducible representation $V_\lambda$ of SU($d$),
+% with worst-case infidelity $\Theta(1/N)$ under single-site erasure noise.
+% The construction uses Schur-Weyl duality 
+% to identify the code space within the multiplicity space 
+% of the fundamental representation 
+% and exploits cyclic-shift symmetry to equalize the information leakage across all sites.
+% These codes saturate known lower bounds~\cite{Faist2020, Zhou2021} up to constants.
+% %
+% While SU($d$)-covariant codes provide optimal error suppression, 
+% they require physical subsystem dimensions at least $d$, 
+% limiting their practicality for large logical spaces.
+ 
+% \textit{(ii) Universality of analog dynamics with symmetry breaking.}
+% We establish sufficient conditions for a set of symmetric Hamiltonians, 
+% augmented by a single symmetry-breaking Hamiltonian, 
+% to generate the full unitary algebra $\mathfrak{u}(\mathcal{H})$.
+% Given a finite symmetry group $G$ acting on the Hilbert space, 
+% we decompose the operator algebra into blocks labeled by pairs of irreducible representations 
+% and prove that universality follows 
+% from two conditions: 
+% connectivity of the ``edge graph'' linking isotypic sectors via the breakers, 
+% and a ``full first-factor span'' condition 
+% ensuring that breaker projections cover 
+% the intertwiner spaces between irreducible representations.
+% We apply this result to characterize universal control 
+% for systems with cyclic ($C_n$) and dihedral ($D_n$) symmetries.
+ 
+% \textit{(iii) Lie-algebraic covariant codes.}
+% We combine (i) and (ii) to construct codes covariant under 
+% $\mathfrak{su}(d_1) \oplus \cdots \oplus \mathfrak{su}(d_k)$, 
+% the DLA generated by the native Hamiltonians.
+% The encoding makes all DLA-generated evolutions transversal, 
+% while the symmetry-breaking Hamiltonian becomes a non-transversal \emph{resource gate}, 
+% directly analogous to the $T$ gate in the Clifford$+T$ paradigm 
+% for digital fault-tolerant computation.
+% In the special case where each block is $\mathfrak{su}(2)$, 
+% the construction reduces to $k$ independent copies 
+% of the SU(2)-covariant code from (i), 
+% using only physical qubits, 
+% with inter-block couplings serving as the resource interaction.
+ 
+% This framework provides a concrete bridge 
+% between the theory of covariant approximate error correction 
+% and the practice of analog quantum simulation.
+% The ``easy'' operations of an analog simulator 
+% (those generated by native, symmetric Hamiltonians) 
+% are protected by the covariant code, 
+% while universality is achieved by a single class of resource operations 
+% whose fault-tolerant implementation 
+% can be addressed by techniques analogous to magic-state distillation.
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+\textit{Acknowledgements.---} We acknowledge the insightful discussion with xxx.
+ 
+
+ 
+% ============================================================
+%  BIBLIOGRAPHY
+% ============================================================
+\let\oldaddcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{}
+\bibliography{main.bib}
+\let\addcontentsline\oldaddcontentsline
+
+ \section*{End Matter}
+ 
+% ============================================================
+%  APPENDIX
+% ============================================================
+\clearpage
+\newpage
+\onecolumngrid
+ 
+\begin{appendix}
+\section{ABC}
+ 
+\end{appendix}
+ 
+\end{document}
