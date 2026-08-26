@@ -10,6 +10,7 @@
 \usepackage{algpseudocode}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{paper-ai}
 
 \sisetup{
   separate-uncertainty = true,
@@ -4582,7 +4583,7 @@ Thus our encoding \(\mathcal E\) is \(\varepsilon\)-approximate with \(\varepsil
 
 \end{proof}
 
-\subsection{Performance under multi-qudit erasure errors}\label{subsec:supple_multi_erasure_noise}
+\subsection{Performance under $2$-qudit and $3$-qudit erasure errors}\label{subsec:supple_multi_erasure_noise}
 
 The following Lemmas~\ref{lem:M_module_irreducibility}-\ref{lem:3-body_action} are axiliary results that we will need for our analysis of multi-qudit erasure errors and thus can be skipped on first reading.
 For notation see Section~\ref{sec:supple_sud} and Nomenclature section.
@@ -5446,20 +5447,20 @@ From which we get the final formula for $X_b$ as stated in the lemma.
 \begin{smproposition}\label{prop:3site-fundamental}
 Let
     $
-        \mathcal H_L=V_{\omega_1},\;
-        \mathcal H_P=(V_{\omega_1})^{\otimes n}
-    $
-    with $d=p^r$ where $p$ is prime and $r$ is a positive integer, 
-    and $n$ is such that $n-1=p^k$, where $k \geq r$ is a positive integer. 
-    Equip \(\mathcal H_L\) with the fundamental representation of
-    \(\mathfrak{su}(d)\), and equip \(\mathcal H_P\) with the transversal
-    representation given by
-    \begin{equation}
-    \begin{gathered}
-    t_a \rightarrow \sum_{i=1}^n t_a^{(i)}, \quad a=\overline{1, d^2-1},
-    \end{gathered}
-    \end{equation} 
-    where $t_a^{(i)}$ is a fundamental of $t_a$ on the $i$-th physical space $V_{\omega_1}$.
+            \mathcal H_L=V_{\omega_1},\;
+                    \mathcal H_P=(V_{\omega_1})^{\otimes n}
+                        $
+                            with $d=p^r$ where $p$ is prime and $r$ is a positive integer, 
+                                and $n$ is such that $n-1=p^k$, where $k \geq r$ is a positive integer. 
+                                    Equip \(\mathcal H_L\) with the fundamental representation of
+                                        \(\mathfrak{su}(d)\), and equip \(\mathcal H_P\) with the transversal
+                                            representation given by
+                                                \begin{equation}
+                                                    \begin{gathered}
+                                                        t_a \rightarrow \sum_{i=1}^n t_a^{(i)}, \quad a=\overline{1, d^2-1},
+                                                            \end{gathered}
+                                                                \end{equation} 
+                                                                    where $t_a^{(i)}$ is a fundamental of $t_a$ on the $i$-th physical space $V_{\omega_1}$.
     For sufficiently
     large $n$ there exists an $\mathfrak{su}(d)$-covariant encoding $\mathcal{E}$ with respect to these representations, such that the three-site reduced state has the following form:
 \begin{equation}\label{eq:main-3site-difference}
@@ -5531,7 +5532,7 @@ For noise channel $\mathcal{N}(\sigma)=\sum_{1 \leq i<j<k \leq n} p_{i j k} \lef
 \[
     F\left(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda_0\right)=1-\frac{3\left(d^2-1\right)}{8n^2}+O\left(n^{-3}\right),
 \]
-where $\Lambda_0$ is defined in (\ref{eq:constant_channel_3site}).
+where $\Lambda_0$ is defined in (\eqref{eq:constant_channel_3site}).
 \end{smproposition}
 
 \begin{proof}
@@ -5637,6 +5638,386 @@ where $\Lambda_0$ is defined in (\ref{eq:constant_channel_3site}).
                 F(\widehat{\mathcal{N} \circ \mathcal{E}}, \Lambda_0)=1-\frac{3\left(d^2-1\right)}{8n^2}+O\left(n^{-3}\right),
     \]
     which completes our proof.
+\end{proof}
+
+\subsection{Performance under multi-qudit erasure noise}\label{subsec:supple_multiqudit_erasure}
+
+Let $\{e_1,\ldots,e_d\}$ be the standard basis of $\C^d$.  Define the normalized totally antisymmetric $d$-qudit state
+\begin{equation}
+\label{eq:singlet}
+  \ket{\zeta_d}
+  :=\frac1{\sqrt{d!}}
+  \sum_{\pi\in S_d}\operatorname{sgn}(\pi)
+  e_{\pi(1)}\otimes\cdots\otimes e_{\pi(d)}.
+\end{equation}
+
+\begin{smlemma}
+\label{lem:singlet-red-states}
+For every $g\in SU(d)$,
+$
+  g^{\otimes d}\ket{\zeta_d}=\ket{\zeta_d}.
+$
+For $0\le s\le d$, the reduced density operator of any $s$ tensor factors of $\ket{\zeta_d}\bra{\zeta_d}$ is
+\begin{equation}
+\label{eq:tau-s}
+  \tau_s
+  :=\frac{\Pi_{\wedge^sV_{\omega_1}}}{\binom ds},
+\end{equation}
+where $\Pi_{\wedge^sV_{\omega_1}}$ is the orthogonal projector onto $\wedge^sV_{\omega_1}$; by convention $\tau_0=1$.  In particular,
+$
+  \tau_1=\tau:=\frac{I_d}{d}.
+$
+\end{smlemma}
+\begin{proof}
+The vector in~\eqref{eq:singlet} spans $\wedge^dV_{\omega_1}$.  The action of $g^{\otimes d}$ on this one-dimensional space is multiplication by $\det g=1$, proving invariance.  An $s$-site reduced state is $SU(d)$-invariant and is supported on $\wedge^sV_{\omega_1}$, because the global vector is antisymmetric under interchange of any two retained sites.  The representation $\wedge^sV_{\omega_1}$ is irreducible for $0\le s\le d$.  Schur's lemma therefore makes the reduced state a scalar multiple of $\Pi_{\wedge^sV_{\omega_1}}$, and unit trace fixes the scalar to $1/\binom ds$.
+\end{proof}
+
+We partition the $n=qd+1$ physical positions into a distinguished position $0$ and $q$ ordered blocks $B_1,\ldots,B_q$, each of size $d$.  Define the seed isometry
+\begin{equation}
+\label{eq:seed-isometry}
+  V_0\ket\psi
+  :=\ket\psi_0\otimes\ket{\zeta_d}_{B_1}\otimes\cdots\otimes\ket{\zeta_d}_{B_q}.
+\end{equation}
+
+\begin{smproposition}
+\label{prop:seed-covariance}
+The map $V_0:V_{\omega_1}\to V_{\omega_1}^{\otimes n}$ is an isometry and $SU(d)$-covariant, i. e.
+\[
+  V_0U(g)=U(g)^{\otimes n}V_0
+  \qquad(g\in SU(d)).
+\]
+\end{smproposition}
+
+\begin{proof}
+Isometry is immediate from normalization of the singlets.  Covariance follows by applying Lemma~\ref{lem:singlet-red-states} to each of the $q$ background blocks.
+\end{proof}
+We fix an isometric Schur--Weyl inclusion
+\begin{equation}
+\label{eq:W-inclusion}
+  W_{\omega_1}:V_{\omega_1}\otimes M_{\omega_1}\longrightarrow V_{\omega_1}^{\otimes n},
+\end{equation}
+which is obviously an $SU(d)$- and $S_n$-intertwiner.
+Since $V_0$ is an $SU(d)$-intertwiner into the fundamental isotypic component, Schur's lemma gives a unit vector $\ket{m_0}\in M_{\omega_1}$ such that, after fixing the identification of the irrep factor,
+\begin{equation}
+\label{eq:seed-multiplicity-vector}
+  V_0=W_{\omega_1}(I_{V_{\omega_1}}\otimes\ket{m_0}).
+\end{equation}
+
+For every unit vector $\ket m\in M_{\omega_1}$, define
+\begin{equation}
+\label{eq:Vm}
+  V_m:=W_{\omega_1}(I_{V_{\omega_1}}\otimes\ket m):V_{\omega_1}\longrightarrow V_{\omega_1}^{\otimes n},
+  \qquad
+  \mathcal{E}_m(X):=V_mXV_m^\dagger.
+\end{equation}
+Every $V_m$ is an isometry and is exactly $SU(d)$-covariant.
+
+\begin{smproposition}
+\label{prop:orbit-twirl}
+For every $X\in\End(V)$,
+\begin{equation}
+\label{eq:orbit-twirl}
+  \mathbb{E}_{m\sim\mathrm{Haar}(M_{\omega_1})}\bigl[V_mXV_m^\dagger\bigr]
+  =\frac1{n!}\sum_{\pi\in S_n}
+  P_\pi\,V_0XV_0^\dagger P_\pi^\dagger.
+\end{equation}
+\end{smproposition}
+
+\begin{proof}
+The Haar first moment is
+\[
+  \mathbb{E}_m\ket m\bra m=\frac{I_{M_{\omega_1}}}{\dim M_{\omega_1}},
+\]
+hence the left-hand side is $W_{\omega_1}(X\otimes I_{M_{\omega_1}}/\dim M_{\omega_1})W_{\omega_1}^\dagger$.  On the other hand, by~\eqref{eq:group_act_on_code} and~\eqref{eq:seed-multiplicity-vector}, the right-hand side is
+\[
+  W_{\omega_1}\!\left(
+    X\otimes\frac1{n!}\sum_{\pi\in S_n}
+    R_{\omega_1}(\pi)\ket{m_0}\bra{m_0}R_{\omega_1}(\pi)^\dagger
+  \right)W_{\omega_1}^\dagger.
+\]
+The operator in parentheses commutes with the irreducible representation $R_{\omega_1}$.  Schur's lemma and unit trace make it $I_{M_{\omega_1}}/\dim M_{\omega_1}$.
+\end{proof}
+
+Set
+\[
+  N:=qd=n-1.
+\]
+Let $\beta_{\ell,N}$ denote the state of $\ell$ labeled positions obtained by choosing an ordered $\ell$-tuple of distinct sites uniformly from the $N$ sites of the background state $\ket{\zeta_d}\bra{\zeta_d}^{\otimes q}$ and retaining the chosen sites in their sampled order.  Equivalently, it is the $\ell$-site reduced state of the permutation twirl of the background.  We set $\beta_{0,N}=1$.
+
+For $x\in\C$ and $r\in\mathbb N$, write
+\[
+  (x)_r=x(x-1)\cdots(x-r+1)
+\]
+for the falling factorial.  If $\pi$ is a set partition of $[\ell]$ and $B\in\pi$ is a block, let $\tau_{|B|}^{(B)}$ denote the state~\eqref{eq:tau-s} acting on the tensor positions indexed by $B$.
+
+\begin{smproposition}
+\label{prop:beta-partition}
+For every $0\le\ell\le N$,
+\begin{equation}
+\label{eq:beta-partition}
+  \beta_{\ell,N}
+  =
+  \sum_{\substack{\pi\in\operatorname{Part}([\ell])\\ |B|\le d\ \forall B\in\pi}}
+  \frac{(q)_{|\pi|}\prod_{B\in\pi}(d)_{|B|}}
+       {(qd)_\ell}
+  \bigotimes_{B\in\pi}\tau_{|B|}^{(B)}.
+\end{equation}
+\end{smproposition}
+
+\begin{proof}
+An ordered sample of $\ell$ distinct background sites determines a set partition $\pi$ of $[\ell]$: two sample labels lie in the same block precisely when the corresponding sites came from the same singlet block.  If $\pi$ has $r$ blocks, there are $(q)_r$ injective assignments of its blocks to the $q$ singlets.  Once a block $B$ has been assigned to a singlet, there are $(d)_{|B|}$ ordered choices of distinct sites within that singlet.  The total number of ordered samples is $(qd)_\ell$.  Conditional on the occupancy partition, the retained state factorizes across distinct singlets, and the factor belonging to $B$ is $\tau_{|B|}^{(B)}$ by Lemma~\ref{lem:singlet-red-states}.  Summing the conditional states with their exact probabilities gives~\eqref{eq:beta-partition}.
+\end{proof}
+
+\begin{smlemma}
+\label{lem:collision}
+For fixed $\ell$,
+\begin{equation}
+\label{eq:collision-bound}
+  \left\|\beta_{\ell,N}-\tau^{\otimes\ell}\right\|_1
+  \le
+  2\binom\ell2\frac{d-1}{N-1}.
+\end{equation}
+Consequently $\beta_{\ell,N}=\tau^{\otimes\ell}+O_{d,\ell}(n^{-1})$ in trace norm.
+\end{smlemma}
+
+\begin{proof}
+For any fixed pair of sample labels, after the first site has been chosen, exactly $d-1$ of the remaining $N-1$ sites belong to the same singlet.  Hence the probability that this pair collides is $(d-1)/(N-1)$.  By the union bound, the probability $p_{\mathrm{coll}}$ that at least one pair collides obeys
+\[
+  p_{\mathrm{coll}}
+  \le\binom\ell2\frac{d-1}{N-1}.
+\]
+Conditioned on no collision, the $\ell$ sites come from distinct singlets.  Their state is exactly $\tau^{\otimes\ell}$ because different singlet blocks are independent and every one-site singlet marginal is $\tau$.  Thus
+\[
+  \beta_{\ell,N}
+  =(1-p_{\mathrm{coll}})\tau^{\otimes\ell}
+    +p_{\mathrm{coll}}\sigma_{\mathrm{coll}}
+\]
+for a density operator $\sigma_{\mathrm{coll}}$, and~\eqref{eq:collision-bound} follows from $\|\sigma_{\mathrm{coll}}-\tau^{\otimes\ell}\|_1\le2$.
+\end{proof}
+
+For a subset $S\subset[n]$ of size $k$, use increasing order to identify $V_{\omega_1}^{\otimes S}$ with $V_{\omega_1}^{\otimes k}$ and define \textit{the erased-subsystem channel}
+\begin{equation}
+\label{eq:local-channel}
+  \Phi_{S,m}(X)
+  :=\Tr_{S^c}(V_mXV_m^\dagger).
+\end{equation}
+and define the \textit{mean $k$-site channel}
+\[
+  \overline\Phi_{k,n}
+  :=\mathbb{E}_m\Phi_{S,m},
+\]
+where $S$ is any fixed $k$-subset.  By permutation invariance of the average, this is independent of $S$ after the canonical identification of the output sites.
+
+\begin{smproposition}
+\label{prop:exact-mean-channel}
+Let
+    $
+        \mathcal H_L=V_{\omega_1},\;
+        \mathcal H_P=(V_{\omega_1})^{\otimes n}
+    $
+    with $d=p^r$ where $p$ is prime and $r$ is a positive integer, 
+    and $n$ is such that $n-1=p^s$, where $s \geq r$ is a positive integer. 
+    Equip \(\mathcal H_L\) with the fundamental representation of
+    \(\mathfrak{su}(d)\), and equip \(\mathcal H_P\) with the transversal
+    representation given by
+    \begin{equation}
+    \begin{gathered}
+    t_a \rightarrow \sum_{i=1}^n t_a^{(i)}, \quad a=\overline{1, d^2-1},
+    \end{gathered}
+    \end{equation} 
+    where $t_a^{(i)}$ is a fundamental of $t_a$ on the $i$-th physical space $V_{\omega_1}$. \elo{Are the same assumptions needed for this proposition?}
+Then, for every $X\in\End(V)$,
+\begin{equation}
+\label{eq:exact-mean-channel}
+    \overline{\Phi}_{k,n}(X)
+    =
+    \frac{n-k}{n}\Tr(X)\,\beta_{k,N}
+    +
+    \frac{1}{n}\sum_{j=1}^k
+    X^{(j)}\otimes
+    \beta_{k-1,N}^{(\widehat j)}
+    .
+\end{equation}
+Here $X^{(j)}$ acts on the $j$-th retained tensor factor, while
+$\beta_{k-1,N}^{(\widehat j)}$ acts on all retained tensor factors
+except $j$.
+\end{smproposition}
+
+\begin{proof}
+Use the permutation-twirl description in Proposition~\ref{prop:orbit-twirl}.  Under a uniformly random permutation, the distinguished logical seed position is uniformly distributed among the $n$ physical positions.
+If it is outside the retained $k$-set, which occurs with probability $(n-k)/n$, tracing it out produces the scalar $\Tr X$, and the retained sites form a uniform ordered $k$-sample from the $N$ background sites.  This gives the first term of~\eqref{eq:exact-mean-channel}.
+If the distinguished position is the $j$th retained position, which occurs with probability $1/n$, that factor contains $X$, while the remaining $k-1$ factors form a uniform ordered sample from the background.  Summing over $j$ gives the second term.  
+\end{proof}
+
+\begin{smlemma}[\elo{Can this lemma be applied to the previous propositions?}]
+\label{lem:bures-expansion}
+Let $r$ be fixed.  Let $\eta>0$ be an $r\times r$ density operator with eigenvalues $\lambda_1,\ldots,\lambda_r$, and let $\Delta=\Delta^\dagger$ satisfy $\Tr\Delta=0$ and $\eta+\Delta\ge0$.  If $\lambda_{\min}(\eta)\ge c>0$ and $\|\Delta\|_2$ is sufficiently small, then, in an eigenbasis of $\eta$,
+\begin{equation}
+\label{eq:general-bures-expansion}
+  f(\eta+\Delta,\eta)
+  =1-\frac14\sum_{a,b=1}^r
+      \frac{|\Delta_{ab}|^2}{\lambda_a+\lambda_b}
+      +O_{r,c}(\|\Delta\|_2^3).
+\end{equation}
+If in addition
+\[
+  \eta=\frac{I_r}{r}+O(\epsilon),
+  \qquad
+  \Delta=O(\epsilon),
+\]
+then
+\begin{equation}
+\label{eq:mixed-bures-expansion}
+  f(\eta+\Delta,\eta)
+  =1-\frac r8\Tr(\Delta^2)+O_r(\epsilon^3).
+\end{equation}
+\end{smlemma}
+
+\begin{proof}
+Diagonalize $\eta=\operatorname{diag}(\lambda_1,\ldots,\lambda_r)$ and set
+\[
+  B:=\sqrt\eta\,\Delta\sqrt\eta.
+\]
+Then
+\[
+  f(\eta+\Delta,\eta)
+  =\Tr\sqrt{\eta^2+B}.
+\]
+For $f(x)=\sqrt x$, the second derivative of the trace functional along a Hermitian perturbation is
+\[
+  \left.\frac{\dd^2}{\dd t^2}\Tr f(A+tB)\right|_{t=0}
+  =\sum_{a,b}
+  \frac{f'(\mu_a)-f'(\mu_b)}{\mu_a-\mu_b}|B_{ab}|^2,
+\]
+with the diagonal terms interpreted by continuity, where $\mu_a$ are the eigenvalues of $A$.  Here $A=\eta^2$, so $\mu_a=\lambda_a^2$, $B_{ab}=\sqrt{\lambda_a\lambda_b}\,\Delta_{ab}$, and
+\[
+  \frac{f'(\lambda_a^2)-f'(\lambda_b^2)}
+       {\lambda_a^2-\lambda_b^2}
+  =-\frac1{2\lambda_a\lambda_b(\lambda_a+\lambda_b)}.
+\]
+The first derivative is
+\[
+  \sum_a\frac1{2\lambda_a}B_{aa}
+  =\frac12\Tr\Delta=0.
+\]
+Multiplying the second derivative by the Taylor factor $1/2$ gives the quadratic term in~\eqref{eq:general-bures-expansion}.  Because the spectrum remains in a compact subset of $(0,\infty)$, the trace square-root functional has a uniformly bounded third Fr\'echet derivative in a neighborhood of $\eta^2$, yielding the stated remainder.
+
+If $\lambda_a=1/r+O(\epsilon)$, then
+\[
+  \frac1{\lambda_a+\lambda_b}=\frac r2+O_r(\epsilon).
+\]
+Since $\sum_{a,b}|\Delta_{ab}|^2=\Tr(\Delta^2)=O(\epsilon^2)$, substituting this into~\eqref{eq:general-bures-expansion} gives~\eqref{eq:mixed-bures-expansion}.
+\end{proof}
+
+\begin{smproposition}\label{prop:k-loc_fidelity}
+For fixed $k, d$
+\begin{equation}
+\label{eq:mean-fidelity}
+  \mathcal{F}(\overline\Phi_{k,n},\Lambda_{k,n})
+  =1-\frac{k(d^2-1)}{8n^2}+O_{d,k}(n^{-3}).
+\end{equation}
+where 
+\begin{equation}
+\label{eq:lambda-kn}
+  \lambda_{k,n}:=\overline\Phi_{k,n}(\tau),
+  \qquad
+  \Lambda_{k,n}(X):=\Tr(X)\,\lambda_{k,n}.
+\end{equation}
+\end{smproposition}
+
+\begin{proof}
+    From Proposition~\ref{prop:exact-mean-channel} and Lemma~\ref{lem:collision} it follows that
+    \begin{equation}
+    \label{eq:exact-leakage}
+    (\overline\Phi_{k,n}-\Lambda_{k,n})(X)
+    =\frac1n\sum_{j=1}^k
+    \left(X-\Tr(X)\tau\right)^{(j)}
+    \otimes\beta_{k-1,N}^{(\widehat j)}=\frac1n\sum_{j=1}^k
+  \left(X-\Tr(X)\tau\right)^{(j)}
+  \otimes\tau^{\otimes(k-1)}_{\widehat j}
+  +O_{d,k}(n^{-2})\,\|X\|_1.
+    \end{equation}
+    Both $\overline\Phi_{k,n}$ and $\Lambda_{k,n}$ are $SU(d)$-covariant under the fundamental input action and the collective output action.  Indeed, every $\beta_{\ell,N}$ is $SU(d)$-invariant.  Therefore \ref{??} applies,
+    meaning that optimum is attained on maximally mixed state $I_d/d$, i. e.
+    \[
+        \mathcal{F}(\overline\Phi_{k,n},\Lambda_{k,n})=f(\sigma_{k,n},\eta_{k,n})=f(\eta_{k,n}+\Delta_{k,n},\eta_{k,n}).
+    \]
+    Let $R\cong V_{\omega_1}$ be a reference and let
+    \[
+    \ket{\Phi_d}_{LR}=\frac1{\sqrt d}\sum_{a=1}^d\ket a_L\ket a_R,
+    \qquad
+    \Phi_{LR}:=\ket{\Phi_d}\bra{\Phi_d}
+    \]
+    be purification of maximally mixed state.
+    Define the traceless two-body operator
+    \begin{equation}
+    \label{eq:Gamma}
+    \Gamma_{jR}:=\Phi_{jR}-\tau_j\otimes\tau_R.
+    \end{equation}
+    Set
+    \begin{align}
+    \sigma_{k,n}
+    &:=(\overline\Phi_{k,n}\otimes\id_R)(\Phi_{LR}),\\
+    \eta_{k,n}
+    &:=(\Lambda_{k,n}\otimes\id_R)(\Phi_{LR})
+        =\lambda_{k,n}\otimes\tau_R,\\
+    \Delta_{k,n}&:=\sigma_{k,n}-\eta_{k,n}.
+    \end{align}
+    Notice, that
+    \begin{equation}
+    \label{eq:exact-choi-difference}
+    \Delta_{k,n}
+    =\frac1n\sum_{j=1}^k
+    \Gamma_{jR}\otimes\beta_{k-1,N}^{(\widehat j)}.
+    \end{equation}
+    Indeed, expand
+\[
+  \Phi_{LR}=\frac1d\sum_{a,b=1}^d E_{ab}\otimes E_{ab}
+\]
+and apply the exact leakage formula~\eqref{eq:exact-leakage} to each $E_{ab}$, to get
+\[
+  \frac1d\sum_{a,b}
+  (E_{ab}-\delta_{ab}\tau)\otimes E_{ab}
+  =\Phi_{LR}-\tau_L\otimes\tau_R.
+\]
+Defining 
+\begin{equation}
+\label{eq:Aj}
+  A_j:=\Gamma_{jR}\otimes\tau_{\widehat j}^{\otimes(k-1)},
+\end{equation}
+we get
+ \begin{equation}
+\label{eq:Delta-leading}
+  \Delta_{k,n}=\frac1n\sum_{j=1}^kA_j+O_{d,k}(n^{-2}), \quad \eta_{k,n}=\frac{I_{d^{k+1}}}{d^{k+1}}+O_{d,k}(n^{-1})
+\end{equation}
+from Eq.~\eqref{eq:exact-leakage}.
+For $i\ne j$,
+\begin{equation}
+\label{eq:Aj-norm}
+  \Tr(A_j^2)=\frac{d^2-1}{d^{k+1}}, \quad \Tr(A_iA_j)=0.
+\end{equation}
+Indeed, The partial trace of $\Gamma_{jR}$ over either of its factors vanishes.  For $i\ne j$, the product $A_iA_j$ contains a factor $\tau_i$ multiplying $\Gamma_{iR}$ while the remaining operator is independent of subsystem $i$; tracing subsystem $i$ therefore gives zero.  This proves orthogonality.
+Next,
+\[
+  \Tr(\Gamma_{jR}^2)
+  =\Tr(\Phi_{jR}^2)
+   -2\Tr(\Phi_{jR}\tau_j\otimes\tau_R)
+   +\Tr((\tau_j\otimes\tau_R)^2)
+  =1-\frac1{d^2}.
+\]
+Since $\Tr(\tau^2)=1/d$, the second part of Eq.~\eqref{eq:Aj-norm} follows. Therefore
+\begin{equation}
+\label{eq:Delta-HS}
+  \Tr(\Delta_{k,n}^2)
+  =\frac{k(d^2-1)}{d^{k+1}n^2}+O_{d,k}(n^{-3}),
+\end{equation}
+which follows from Eq.~\eqref{eq:Delta-leading} and Eq.~\eqref{eq:Aj-norm}. By~\eqref{eq:Delta-leading}, $\eta_{k,n}$ is full rank for sufficiently large $n$ and has minimum eigenvalue bounded below by a positive constant depending only on $d,k$.  Apply Lemma~\ref{lem:bures-expansion} with $r=d^{k+1}$, $\epsilon=1/n$, and then use Eq.~\eqref{eq:Delta-HS}:
+\begin{align*}
+  f(\sigma_{k,n},\eta_{k,n})
+  &=1-\frac{d^{k+1}}8\Tr(\Delta_{k,n}^2)
+       +O_{d,k}(n^{-3})\\
+  &=1-\frac{k(d^2-1)}{8n^2}+O_{d,k}(n^{-3}).
+\end{align*}
 \end{proof}
 
 \subsection{Performance under arbitrary three-qudit noise}\label{subsec:supple_arb_3_noise}
