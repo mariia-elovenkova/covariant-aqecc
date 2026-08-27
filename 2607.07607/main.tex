@@ -6020,6 +6020,343 @@ which follows from Eq.~\eqref{eq:Delta-leading} and Eq.~\eqref{eq:Aj-norm}. By~\
 \end{align*}
 \end{proof}
 
+\subsubsection{Haar-typical multiplicity vectors}\label{subsubsec:supple_haar_typical}
+
+Let
+\[
+  r_k:=d^{k+1},
+  \qquad
+  M_{n,k}:=\binom nk d^{2k+2}=\binom nk r_k^2, \qquad D_q:=\operatorname{dim}\left[q+1, q^{d-1}\right].
+\]
+Fix orthonormal computational bases of $V_{\omega_1}$ and $V_{\omega_1}^{\otimes k}$.  For $a,b\in[d]$ and output basis vectors $u,v\in[d]^k$, define
+\begin{equation}
+\label{eq:test-operator}
+  A_{S;ab;uv}
+  :=(\bra b\otimes I_{M_{\omega_1}})
+  W_{\omega_1}^\dagger\bigl(\ket v\bra u_S\otimes I_{S^c}\bigr)W_{\omega_1}
+  (\ket a\otimes I_{M_{\omega_1}})
+  \in\End(M_{\omega_1}).
+\end{equation}
+
+\begin{smlemma}
+\label{lem:quadratic-form}
+For every unit $m\in M_{\omega_1}$,
+\begin{equation}
+\label{eq:entry-quadratic}
+  \bra u\Phi_{S,m}(E_{ab})\ket v
+  =\bra m A_{S;ab;uv}\ket m,
+\end{equation}
+with $\|A_{S;ab;uv}\|_\infty\le1$. Moreover,
+\begin{equation}
+    \frac{\operatorname{Tr} A_{S ; a b ; u v}}{D_q}=\langle u| \bar{\Phi}_{k, n}\left(E_{a b}\right)|v\rangle .
+\end{equation}
+\end{smlemma}
+
+\begin{proof}
+We have
+\begin{align*}
+\langle u| \Phi_{S, m}\left(E_{a b}\right)|v\rangle&=\langle u|\operatorname{Tr}_{S^c}\left[V_m E_{a b} V_m^{\dagger}\right]|v\rangle\\
+&=\operatorname{Tr}\left[\left(|v\rangle\left\langle\left. u\right|_S \otimes I_{S^c}\right) W_{\omega_1}\left(E_{a b} \otimes|m\rangle\langle m|\right) W_{\omega_1}^{\dagger}\right]\right.\\
+&=\operatorname{Tr}\left[W_{\omega_1}^{\dagger}\left(|v\rangle\left\langle\left. u\right|_S \otimes I_{S^c}\right) W_{\omega_1}\left(\ket{a}\bra{b} \otimes|m\rangle\langle m|\right)\right]\right.\\
+&=(\langle b| \otimes I) W_{\omega_1}^{\dagger}\left(|v\rangle\left\langle\left. u\right|_S \otimes I_{S^c}\right) W_{\omega_1}(|a\rangle \otimes I)\right.\\
+&=A_{S ; a b ; u v},
+\end{align*}
+which proves Eq.~\eqref{eq:entry-quadratic}. Norm bound follows from $W_{\omega_1}$ being an isometry. The last statement follows from
+\[
+    \begin{aligned}
+\mathbb{E}_m\langle m| A|m\rangle & =\operatorname{Tr}\left[A \mathbb{E}_m|m\rangle\langle m|\right] \\
+& =\operatorname{Tr}\left[A \frac{I}{D_q}\right] \\
+& =\frac{\operatorname{Tr} A}{D_q},
+\end{aligned}
+\]
+Eq.~\eqref{eq:entry-quadratic} and 
+\[
+\mathbb{E}_m\langle u| \Phi_{S, m}\left(E_{a b}\right)|v\rangle=\langle u| \bar{\Phi}_{k, n}\left(E_{a b}\right)|v\rangle.
+\]
+\end{proof}
+
+\begin{smlemma}
+\label{lem:haar-second-moment}
+Let $m$ be Haar-random on the unit sphere of a $D$-dimensional complex Hilbert space.  For any $A\in\End(\C^D)$,
+\begin{equation}
+\label{eq:haar-variance}
+  \mathbb{E}_m\left|
+  \bra mA\ket m-\frac{\Tr A}{D}
+  \right|^2
+  =\frac{\Tr(AA^\dagger)-|\Tr A|^2/D}{D(D+1)}.
+\end{equation}
+In particular, if $\|A\|_\infty\le1$, the variance is at most $1/(D+1)$.
+\end{smlemma}
+
+\begin{proof}
+Define 
+\[
+Z=\langle m| A|m\rangle-\frac{\operatorname{Tr} A}{D},
+\]
+and from the proof of the Lemma~\ref{lem:quadratic-form} we have $\mathbb{E}_m Z=0$. Then
+\[
+\left.\mathbb{E}|Z|^2=\mathbb{E}|\langle m| A| m\right\rangle\left.\right|^ 2-\frac{|\operatorname{Tr} A|^2}{D^2}.
+\]
+As for the first term, we have
+\[
+\mathbb{E}|\langle m| A| m\rangle\left.\right|^ 2=\operatorname{Tr}\left[\left(A \otimes A^{\dagger}\right)\mathbb{E}\left(|m\rangle\langle m| \otimes |m\rangle\langle m|\right)\right],
+\]
+where we use Haar second moment identity
+\[
+\mathbb{E}_m\left[(|m\rangle\langle m|)^{\otimes 2}\right]=\frac{I+\mathrm{SWAP}}{D(D+1)},
+\]
+from which it follows that
+\[
+   \mathbb{E}|\langle m| A| m\rangle\left.\right|^ 2= \frac{|\operatorname{Tr} A|^2+\operatorname{Tr}\left(A A^{\dagger}\right)}{D(D+1)},
+\]
+which concludes the proof of Eq.~\eqref{eq:haar-variance}. The last statement follows from $\operatorname{Tr}\left(A A^{\dagger}\right) \leq D\|A\|_{\infty}^{2} \leq D$.
+\end{proof}
+
+\begin{smlemma}
+\label{lem:entry-to-diamond}
+Let $T:\End(\C^d)\to\End((\C^d)^{\otimes k})$ be linear.  If every matrix element of every $T(E_{ab})$ has absolute value at most $t$, then
+\begin{equation}
+\label{eq:entry-diamond}
+  \|T\|_\diamond\le r_k^{3/2}t,
+  \qquad r_k=d^{k+1}.
+\end{equation}
+\end{smlemma}
+
+\begin{proof}
+Let $J(T)=\sum_{a,b}T(E_{ab})\otimes E_{ab}$ be the unnormalized Choi matrix.  It is an $r_k\times r_k$ matrix and all of its entries have magnitude at most $t$.  Therefore
+\[
+  \|J(T)\|_2\le r_k t,
+  \qquad
+  \|J(T)\|_1\le\sqrt{r_k}\,\|J(T)\|_2\le r_k^{3/2}t.
+\]
+The standard Choi bound $\|T\|_\diamond\le\|J(T)\|_1$ completes the proof.
+\end{proof}
+
+\begin{smtheorem}
+\label{thm:haar-uniform}
+Let $m$ be Haar-random in $M_{\omega_1}$.  Then
+\begin{equation}
+\label{eq:haar-probability}
+  \mathbb P\!\left[
+    \max_{|S|=k}
+    \|\Phi_{S,m}-\overline\Phi_{k,n}\|_\diamond
+    >r_k^{3/2}D_q^{-1/4}
+  \right]
+  \le
+  \frac{M_{n,k}D_q^{1/2}}{D_q+1}.
+\end{equation}
+For fixed $d,k$, the right-hand side is $e^{-\Omega_d(n)}$.
+\end{smtheorem}
+
+\begin{proof}
+    Define
+    \[
+        Z:=\langle u|\left(\Phi_{S, m}-\bar{\Phi}_{k, n}\right)\left(E_{a b}\right)|v\rangle=\langle m| A_{S ; a b ; u v}|m\rangle-\frac{\operatorname{Tr} A_{S ; a b ; u v}}{D_q},
+    \]
+    where the second equality follows from Lemma~\ref{lem:quadratic-form}. By Lemma~\ref{lem:haar-second-moment}, we have
+    \[
+        \mathbb{E}|Z|^2 \leq \frac{1}{D_q+1}.
+    \]
+    Applying Markov inequality to $|Z|^2$
+    \[
+        \mathbb{P}(|Z|>t)=\mathbb{P}\left(|Z|^2>t^2\right) \leq \frac{\mathbb{E}|Z|^2}{t^2},
+    \]
+    we get
+    \[
+        \mathbb{P}(|Z|>D_q^{-1/4}) \leq \frac{D_q^{1/2}}{D_q+1},
+    \]
+    where we took $t=D_q^{-1/4}$. Random variable $Z$ represents the difference between a matrix element of $\Phi_{S, m}\left(E_{a b}\right)$ and the corresponding matrix element of $\bar{\Phi}_{k, n}\left(E_{a b}\right)$.  The total number of such matrix elements is $M_{n,k}$.  By the union bound,
+    \[
+    \mathbb{P}(\text { some entry is bad }) \leq M_{n, k} \frac{D_q^{1 / 2}}{D_q+1}.
+    \]
+    For "good" events, we have
+    \[
+    \left.\left|\langle u|\left(\Phi_{S, m}-\bar{\Phi}_{k, n}\right)\left(E_{a b}\right)\right| v\right\rangle \mid \leq D_q^{-1 / 4},
+    \]
+    therefore by Lemma~\ref{lem:entry-to-diamond}, we obtain
+    \[
+    \max _{S \mid=k}\left\|\Phi_{S, m}-\bar{\Phi}_{k, n}\right\|_{\diamond} \leq r_k^{3 / 2} D_q^{-1 / 4},
+    \]
+    which concludes the proof.
+\end{proof}
+
+\subsubsection{Efficient sampling of multiplicity vectors}\label{sec:efficient_sampling}
+
+We introduce Young--Yamanouchi basis for the Specht module $[\lambda]$ associated with a partition $\lambda\vdash n$. 
+The Young diagram of $\lambda=(\lambda_1,\lambda_2,\ldots)$ consists of $\lambda_i$ boxes in its $i$th row. 
+A standard Young tableau of shape $\lambda$ is a filling of these boxes with the integers $1,\ldots,n$, each appearing exactly once, such that the entries increase from left to right along every row and from top to bottom along every column. 
+We denote the set of standard Young tableaux of shape $\lambda$ by $\operatorname{SYT}(\lambda)$. 
+The Young--Yamanouchi basis of $[\lambda]$ is the orthonormal basis
+\[
+    \left\{\,\ket{T}:T\in\operatorname{SYT}(\lambda)\,\right\},
+\]
+whose basis vectors are indexed by the standard Young tableaux of shape $\lambda$. 
+For a detailed discussion of Young tableaux, Specht modules, and the Young--Yamanouchi basis, see Ref.~\cite{Sagan2001}.
+
+We will construct vectors
+\begin{equation}\label{eq:family_of_multiplicity_vecs}
+    \left|m_s\right\rangle=\frac{1}{\sqrt{D_q}} \sum_{T \in \operatorname{SYT}\left(\lambda_q\right)} z_s(T)|T\rangle
+\end{equation}
+where we defined
+\[
+    \lambda_q:=(q+1,q^{d-1}), \quad [\lambda_q]\cong M_{\omega_1},
+\]
+such that the seed $s$ has only $O(n \log d)$ bits and every phase
+\[
+z_s(T) \in\{1,-1, i,-i\}
+\]
+can be computed in polynomial time from $s$ and $T$.
+
+\begin{smtheorem}\label{thrm:randomized_multiplicity_vector}
+    Fix $d$ and $k$, and let $n=q d+1$. There exists an explicit randomized algorithm using $O(n \log d)$ random bits that outputs a seed $s$ specifying a flat multiplicity vector
+    $$
+    \left|m_s\right\rangle=\frac{1}{\sqrt{D_q}} \sum_{T \in \operatorname{SYT}\left(\lambda_q\right)} z_s(T)|T\rangle, \quad z_s(T) \in\{1,-1, i,-i\},
+    $$
+    such that each $z_s(T)$ is computable in time poly $(n, d)$, and
+    \begin{equation}\label{eq:randomized_multiplicity_vector_bound}
+    \mathbb{P}_s\left[\max _{|S|=k}\left\|\Phi_{S, m_s}-\bar{\Phi}_{k, n}\right\|_{\diamond}>r_k^{3 / 2} D_q^{-1 / 4}\right] \leq \frac{M_{n, k}}{\sqrt{D_q}}=e^{-\Omega_d(n)}.
+    \end{equation}
+\end{smtheorem}
+\begin{proof}
+The idea is that we want to assign to every tableau $T$ a phase
+$
+z_s(T) \in\{1,-1, i,-i\},
+$
+but we do not want to store one independent random phase for every tableau, because there are
+$
+D_q=e^{\Theta(n)}
+$
+tableaux. Instead, we generate all these phases from a very short random seed. The key idea is that we don't need independence of all phases, instead it is enough to have $4$-wise independence of the phases, which can be achieved with a seed of length $O(n \log d)$.
+
+To efficiently label every tableau $T$ we define a \textit{tableau word} $w(T)$ of length $n$ as follows
+\[
+    w(T)=\left(r_1, \ldots, r_n\right),
+\]
+where $r_t\in\{1, \ldots, d\}$ is the row index of the box containing $t$ in $T$. This encoding requires $h:=n \log d$ bits.
+We identify bitstring $x_T$ with corresponding element of $\mathbb{F}_{2^h}$.
+
+Choose four independent uniformly random elements
+$
+c_0, c_1, c_2, c_3 \in \mathbb{F}_{2^h} .
+$
+These four field elements constitute the seed
+$
+s=\left(c_0, c_1, c_2, c_3\right) .
+$
+Thus the random seed contains exactly
+$
+4 h=O(n \log d)
+$
+bits.
+Define
+$$
+p_s(x):=c_0+c_1 x+c_2 x^2+c_3 x^3 .
+$$
+Fix a surjective $\mathbb{F}_2$-linear map
+$
+L: \mathbb{F}_{2^h} \longrightarrow \mathbb{F}_2^2 .
+$
+For example, after choosing an $\mathbb{F}_2$-basis of the field, $L$ can simply return the first two coordinate bits.
+Write
+$$
+L\left(p_s\left(x_T\right)\right)=\left(b_0(T), b_1(T)\right) .
+$$
+Now define
+$$
+z_s(T):=i^{b_0(T)+2 b_1(T)} .
+$$
+This produces one of the four phases. 
+
+Take any four distinct tableaux
+$
+T_1, T_2, T_3, T_4 .
+$
+Their labels
+$
+x_{T_1}, \ldots, x_{T_4}
+$
+are distinct field elements.
+The map
+$$
+\left(c_0, c_1, c_2, c_3\right) \longmapsto\left(p_s\left(x_{T_1}\right), p_s\left(x_{T_2}\right), p_s\left(x_{T_3}\right), p_s\left(x_{T_4}\right)\right)
+$$
+is a linear map over $\mathbb{F}_{2^h}$. Its matrix is the Vandermonde matrix
+$$
+\left(\begin{array}{cccc}
+1 & x_{T_1} & x_{T_1}^2 & x_{T_1}^3 \\
+1 & x_{T_2} & x_{T_2}^2 & x_{T_2}^3 \\
+1 & x_{T_3} & x_{T_3}^2 & x_{T_3}^3 \\
+1 & x_{T_4} & x_{T_4}^2 & x_{T_4}^3
+\end{array}\right) .
+$$
+Its determinant is
+$
+\prod_{a<b}\left(x_{T_b}-x_{T_a}\right),
+$
+which is nonzero because the $x_{T_j}$ are distinct.
+Consequently,
+$
+p_s\left(x_{T_1}\right), \ldots, p_s\left(x_{T_4}\right)
+$
+are independent uniform field elements.
+Applying $L$ separately to each one preserves independence, and each output is uniform in $\mathbb{F}_2^2$. Therefore
+$
+z_s\left(T_1\right), \ldots, z_s\left(T_4\right)
+$
+are independent uniform fourth roots of unity.
+The same is automatically true for any set of fewer than four tableaux.
+Thus the family
+$
+\left\{z_s(T)\right\}_T
+$
+is exactly four-wise independent.
+
+The second part of the proof follows the ideas introduced in Theorem~\ref{thm:haar-uniform}. We first define
+\[
+Z(s):=\langle u|\left(\Phi_{S, m_s}-\bar{\Phi}_{k, n}\right)\left(E_{a b}\right)|v\rangle=\langle m_s| A_{S ; a b ; u v}|m_s\rangle-\frac{\operatorname{Tr} A_{S ; a b ; u v}}{D_q},
+\]
+where the second equality follows from Lemma~\ref{lem:quadratic-form} and $m_s$ is defined in Eq.~\eqref{eq:family_of_multiplicity_vecs} with seed $s$ constructed just above. Write
+$$
+\left|Y_A(s)\right|^2=\frac{1}{D_q^2} \sum_{\substack{T \neq T^{\prime} \\ U \neq U^{\prime}}} \overline{z_s(T)} z_s\left(T^{\prime}\right) z_s(U) \overline{z_s\left(U^{\prime}\right)} A_{T T^{\prime}} \overline{A_{U U^{\prime}}}
+$$
+Every phase expectation here involves at most four different tableaux. Thus four-wise independence gives exactly the same calculation as full independence.
+Because
+$$
+\mathbb{E} z_s(T)=0, \quad \mathbb{E} z_s(T)^2=0, \quad\left|z_s(T)\right|=1,
+$$
+the only surviving terms are
+$
+T=U, \quad T^{\prime}=U^{\prime} .
+$
+Hence
+$$
+\mathbb{E}_s\left|Y_A(s)\right|^2=\frac{1}{D_q^2} \sum_{T \neq T^{\prime}}\left|A_{T T^{\prime}}\right|^2\leq \frac{\operatorname{Tr}\left(A A^{\dagger}\right)}{D_q^2}\leq \frac{1}{D_q}.
+$$
+Finally, applying the Markov inequality, the union bound argument and Lemma~\ref{lem:entry-to-diamond} as in the proof of Theorem~\ref{thm:haar-uniform} gives Eq.~\ref{eq:randomized_multiplicity_vector_bound}.
+The algorithm samples only
+$
+c_0, c_1, c_2, c_3 \in \mathbb{F}_{2^h} .
+$
+Therefore random-bit complexity $=4 h=O(n \log d)$.
+Evaluating $z_s(T)$ requires:
+encoding the row word of $T$;
+three field multiplications;
+several field additions;
+extracting two linear bits.
+This takes
+$
+\operatorname{poly}(n, \log d)
+$
+bit operations.
+So the sampler is an unconditional randomized polynomial-time algorithm in $n$ for fixed $d$.
+It is a Monte Carlo sampler:
+it always runs in polynomial time;
+the output is good with probability $1-e^{-\Omega(n)}$;
+it does not need to compute or inspect the exponentially large test matrices;
+it does not efficiently certify afterward that the particular seed was good.
+\end{proof}
+
+
 \subsection{Performance under arbitrary three-qudit noise}\label{subsec:supple_arb_3_noise}
 
 \begin{smtheorem}\label{thrm:3_transitive_scale}
