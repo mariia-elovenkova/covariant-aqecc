@@ -332,7 +332,7 @@ As in the single-qudit case, the same reduced state controls protection against 
 
 \subsection{Erasure on an arbitrary fixed number of qudits}\label{subsec:summary_general_k_erasure}
 
-The construction above stops at three erased sites because exactly $k$-transitive subgroups of $S_n$, needed to force all $k$-site reduced states to coincide exactly, do not exist for $k>3$, since apart from the alternating group, which is so large that no covariant code is invariant under it, the classification of finite multiply transitive permutation groups rules out any smaller option. To go beyond three sites, we drop exact equality of the $k$-site reduced states and ask only that they be close to one another, for a well-chosen code.
+The construction above stops at three erased sites because the $k$-transitive subgroups of $S_n$ needed to force all $k$-site reduced states to coincide exactly are not available for $k>3$. Apart from the alternating group, which is so large that no covariant code is invariant under it, the classification of finite multiply transitive permutation groups leaves only the Mathieu groups, and these occur at four values of $n$ and so support no construction with $n\to\infty$. To go beyond three sites, we drop exact equality of the $k$-site reduced states and ask only that they be close to one another, for a well-chosen code.
 
 Closeness has to be measured against something, and the natural reference is an average over a whole family of codes. We start from a simple seed encoding that places the logical qudit at one site and fills the remaining sites with independent $SU(d)$-singlets, Eq.~\eqref{eq:seed-isometry}. The covariance condition leaves a whole family of admissible encodings, Eq.~\eqref{eq:Vm}, and we average over all of them.
 
@@ -1563,7 +1563,7 @@ $$
 \mathbb F_{n-1}\cup{\infty}.
 $$
 
-These groups are the useful proper highly transitive subgroups for our construction. Their use is guided by the classification of finite multiply transitive permutation groups, which relies on the Classification of Finite Simple Groups~\cite{GorensteinLyonsSolomon1994}. In particular, apart from groups that are essentially as large as the full symmetric group, there are no suitable proper $k$-transitive subgroups for $k>3$. The alternating group $A_n$ is a proper highly transitive subgroup of $S_n$, but it is almost as large as $S_n$ and is too restrictive for the second requirement, since it does not provide the nonzero invariant multiplicity subspaces needed for our code construction. Thus, for our purposes, the useful choices are $\mathrm{AGL}(1,n)$ for $k=2$ and $\operatorname{PGL}(2,n-1)$ for $k=3$. For further background on these permutation groups, see Ref.~\cite{DixonMortimer1996}.
+These groups are the useful proper highly transitive subgroups for our construction. Their use is guided by the classification of finite multiply transitive permutation groups, which relies on the Classification of Finite Simple Groups~\cite{GorensteinLyonsSolomon1994}. In particular, apart from the alternating group $A_n$, there is no infinite family of proper $k$-transitive subgroups of $S_n$ for $k>3$. Beyond $S_n$ and $A_n$, the only $4$-transitive groups are the Mathieu groups $M_{11}, M_{12}, M_{23}, M_{24}$, and the only $5$-transitive ones are $M_{12}$ and $M_{24}$; no other group is $6$-transitive. The Mathieu groups occur only at $n\in\{11,12,23,24\}$, so they cannot support a construction with $n\to\infty$. The alternating group $A_n$ is a proper highly transitive subgroup of $S_n$, but it is almost as large as $S_n$ and is too restrictive for the second requirement, since it does not provide the nonzero invariant multiplicity subspaces needed for our code construction. Thus, for our purposes, the useful choices are $\mathrm{AGL}(1,n)$ for $k=2$ and $\operatorname{PGL}(2,n-1)$ for $k=3$. For further background on these permutation groups, see Ref.~\cite{DixonMortimer1996}.
 
 The existence of nonzero invariant subspaces
 $$
@@ -1785,7 +1785,7 @@ $$
 
 \paragraph{Why exact symmetry fails for general $k$.}
 
-For $k\le3$, Section~\ref{subsec:main_muti_erasure_noise} chose the multiplicity vector invariant under a subgroup of $S_n$ that is exactly $k$-transitive, so that all $k$-site reduced states coincide exactly. As explained there, this route stops at $k=3$: apart from subgroups essentially as large as $S_n$ itself, the classification of finite multiply transitive permutation groups leaves no proper $k$-transitive subgroup of $S_n$ for $k>3$~\cite{GorensteinLyonsSolomon1994}, and the one exception, the alternating group $A_n$, is too large to leave a nonzero invariant multiplicity subspace. For fixed $k>3$ we therefore abandon exact symmetry and ask that a \emph{typical} member of a suitable family of codes have $k$-site reduced states that are all close to one another, rather than exactly equal, and we show that such a typical code can be found and sampled efficiently.
+For $k\le3$, Section~\ref{subsec:main_muti_erasure_noise} chose the multiplicity vector invariant under a subgroup of $S_n$ that is exactly $k$-transitive, so that all $k$-site reduced states coincide exactly. As explained there, this route stops at $k=3$:for $k>3$ the classification of finite multiply transitive permutation groups leaves only the alternating group $A_n$, which is too large to leave a nonzero invariant multiplicity subspace, and the Mathieu groups, which occur only at $n\in\{11,12,23,24\}$ and so give no family with $n\to\infty$~\cite{GorensteinLyonsSolomon1994}. For fixed $k>3$ we therefore abandon exact symmetry and ask that a \emph{typical} member of a suitable family of codes have $k$-site reduced states that are all close to one another, rather than exactly equal, and we show that such a typical code can be found and sampled efficiently.
 
 \paragraph{A background-singlet family of codes.}
 
@@ -3930,7 +3930,15 @@ $$
 \end{smlemma}
 
 \begin{proof}
-    Convexity of fidelity on input states $\rho$ follows from Ulman's theorem~\cite{KretschmannSchlingemannWerner2008} and convexity of the underlying function. Now, we prove $G$-invariance. Recall that for an arbitrary state $\rho$ we can write its purification as
+    We first prove convexity in $\rho$. Let $W_{\mathcal N}:\mathcal H_L\to\mathcal H_P\otimes\mathcal H_E$ and $W_{\mathcal M}:\mathcal H_L\to\mathcal H_P\otimes\mathcal H_E$ be Stinespring isometries of $\mathcal N$ and $\mathcal M$. Then $(W_{\mathcal N}\otimes I_R)\ket{\psi_\rho}$ and $(W_{\mathcal M}\otimes I_R)\ket{\psi_\rho}$ purify $(\mathcal N\otimes\operatorname{id})\psi_\rho$ and $(\mathcal M\otimes\operatorname{id})\psi_\rho$, and every other purification is obtained by acting on $\mathcal H_E$ alone. Uhlmann's theorem~\cite{KretschmannSchlingemannWerner2008} therefore gives
+    $
+        F_\rho(\mathcal N,\mathcal M)=\max_W\left|\operatorname{Tr}\left(\rho X_W\right)\right|,
+        \quad
+        X_W:=W_{\mathcal M}^\dagger\left(I_P\otimes W\right)W_{\mathcal N},
+    $
+    the maximum running over unitaries $W$ on $\mathcal H_E$, where we used $\bra{\psi_\rho}(X\otimes I_R)\ket{\psi_\rho}=\operatorname{Tr}(\rho X)$ for the purification below. For each fixed $W$ the map $\rho\mapsto\left|\operatorname{Tr}(\rho X_W)\right|$ is the absolute value of an affine function of $\rho$, hence convex, and a pointwise maximum of convex functions is convex. 
+    
+    Now, we prove $G$-invariance. Recall that for an arbitrary state $\rho$ we can write its purification as
     $
         \left|\psi_\rho\right\rangle=\left(I \otimes \sqrt{\rho^T}\right)|\Phi\rangle,
     $
@@ -5524,13 +5532,13 @@ from which the first scalar product identity gives us $\alpha_i=\frac{1}{n d^2}$
 
 As for two-body coefficients, we have
 \[
-    \operatorname{Tr}\left(D_b^{(i j)} t_a^{(i)} t_c^{(j)}\right)=\frac{1}{4} d_{b a c}, \quad \operatorname{Tr}\left(F_b^{(i j)} t_a^{(i)} t_c^{(j)}\right)=\frac{1}{4} f_{b a c}
+    \operatorname{Tr}\left(D_b^{(i j)} t_a^{(i)} t_c^{(j)}\right)=\frac{d}{4} d_{b a c}, \quad \operatorname{Tr}\left(F_b^{(i j)} t_a^{(i)} t_c^{(j)}\right)=\frac{d}{4} f_{b a c}
 \]
 for distinct $i, j$ from which we get
 \[
-    \operatorname{Tr}\left(X_b t_a^{(i)} t_c^{(j)}\right)=\frac{1}{4} \beta_{i j} d_{b a c}+\frac{1}{4} \gamma_{i j} f_{b a c}
-\] 
-and since for all $a, b, c$ our two-body scalar product is $0$ we get $\beta_{12}=\beta_{13}=\beta_{23}=0$, and $\gamma_{12}=\gamma_{13}=\gamma_{23}=0$.
+    \operatorname{Tr}\left(X_b t_a^{(i)} t_c^{(j)}\right)=\frac{d}{4} \beta_{i j} d_{b a c}+\frac{d}{4} \gamma_{i j} f_{b a c}
+\]
+and since for all $a, b, c$ our two-body scalar product is $0$ we get $\beta_{12}=\beta_{13}=\beta_{23}=0$, and $\gamma_{12}=\gamma_{13}=\gamma_{23}=0$. 
 
 Finally, for three-body coefficients we have
 \[
@@ -7717,6 +7725,11 @@ Basically, the coupling graph records which isotypic sectors are coupled by the 
     $$
     \mathcal{B}_{\beta \alpha} \subseteq S \otimes \mathbf{M}_{\beta \alpha}
     $$
+    Such a smallest subspace exists, and is given explicitly by the contractions of the breakers against the second factor,
+    $$
+    S_{\beta\alpha}=\operatorname{span}_\C\left\{\left(\operatorname{id}\otimes\psi\right)b\;:\;b\in\mathcal B_{\beta\alpha},\ \psi\in\mathbf M_{\beta\alpha}^*\right\},
+    $$
+    where $\operatorname{id}\otimes\psi:\mathbf T_{\beta\alpha}\otimes\mathbf M_{\beta\alpha}\to\mathbf T_{\beta\alpha}$ sends $t\otimes m\mapsto\psi(m)\,t$. Indeed, if $\mathcal B_{\beta\alpha}\subseteq S\otimes\mathbf M_{\beta\alpha}$ then every such contraction lies in $S$; conversely, writing $b=\sum_i t_i\otimes m_i$ with the $m_i$ linearly independent and choosing $\psi_i$ dual to them recovers each $t_i$, so $b$ lies in the span above tensored with $\mathbf M_{\beta\alpha}$.
 \end{smdefinition}
 
 \begin{smdefinition}\label{def:first_factor}
@@ -7875,15 +7888,18 @@ then
 \begin{proof}
 Since $\alpha\neq\beta$, Lemma~\ref{lem:irreducibility} implies that $\mathbf M_{\beta\alpha}$ is an irreducible
 $\mathfrak{sl}(M_\beta)\oplus \mathfrak{sl}(M_\alpha)$-module.
-Therefore, for every nonzero vector $m\in \mathbf M_{\beta\alpha}$, the $\mathfrak l_\C'$-submodule generated by $m$ is all of $\mathbf M_{\beta\alpha}$. Because the action of $\mathfrak l_\C'$ is trivial on the first factor, it follows that for every simple tensor
+By the Density Theorem, applied as in the proof above, the enveloping algebra $\mathcal U(\mathfrak l_\C')$ therefore acts on $\mathbf M_{\beta\alpha}$ as the full algebra $\End_\C(\mathbf M_{\beta\alpha})$. In particular every rank-one operator
 $
-t\otimes m \in \mathbf T_{\beta\alpha}\otimes \mathbf M_{\beta\alpha}
+w\psi:m\mapsto\psi(m)\,w,
 $
-the $\mathfrak l_\C'$-submodule generated by $t\otimes m$ is
-$
-t\otimes \mathbf M_{\beta\alpha}.
-$
-By linearity for $\mathcal B_{\beta\alpha}$ we get that the Lie algebra generated by
+with $w\in\mathbf M_{\beta\alpha}$ and $\psi\in\mathbf M_{\beta\alpha}^*$, is realised by some element of $\mathcal U(\mathfrak l_\C')$.
+The Lie algebra generated by $\mathfrak l_\C'\cup\mathcal B_{\beta\alpha}$ is closed under iterated brackets with elements of $\mathfrak l_\C'$, and by Step 2 the bracket with $L=\sum_\gamma\id_{V_\gamma}\otimes X_\gamma$ acts on $\mathcal W_{\beta\alpha}\cong\mathbf T_{\beta\alpha}\otimes\mathbf M_{\beta\alpha}$ as $T\otimes M\mapsto T\otimes(X_\beta M-MX_\alpha)$, that is, trivially on the first factor. Iterating, it therefore contains $(\operatorname{id}\otimes a)b$ for every $a\in\End_\C(\mathbf M_{\beta\alpha})$ and every $b\in\mathcal B_{\beta\alpha}$. Taking $a=w\psi$ and writing $b=\sum_i t_i\otimes m_i$,
+\[
+\left(\operatorname{id}\otimes w\psi\right)b
+=\sum_i t_i\otimes\psi(m_i)\,w
+=\left(\left(\operatorname{id}\otimes\psi\right)b\right)\otimes w .
+\]
+Since the elements $(\operatorname{id}\otimes\psi)b$ span $S_{\beta\alpha}$ by Definition~\ref{def:breaker_generated_subspace} and $w\in\mathbf M_{\beta\alpha}$ is arbitrary, the Lie algebra generated by
 $
 \mathfrak l_\C' \cup \mathcal B_{\beta\alpha}
 $
