@@ -221,7 +221,7 @@ Covariant Approximate Quantum Codes for Protected Analog Computation
  
 \begin{abstract}
 
-Quantum error correction compatible with continuous symmetries is a fundamental problem in quantum information and a possible route to robust analog quantum simulation. Because the Eastin-Knill theorem forbids exact codes with continuous transversal symmetries, we construct explicit \(SU(d)\)-covariant approximate codes that exploit permutation symmetry to spread logical information uniformly across all physical subsystems. For one-, two-, and three-qudit erasures at known locations, we prove worst-case purified-distance scaling \(\Theta(1/N)\), matching approximate Eastin-Knill lower bounds up to constants, and we extend the reduced-state analysis to general flagged local noise. Exact permutation symmetry of this kind is available only up to three erased sites; for an arbitrary fixed number $k$ of erased sites, we instead show that Haar-random and efficiently sampled encodings achieve worst-case distance $O(\sqrt{k}/N)$ with probability exponentially close to one. For single-qudit erasure, we construct an explicit near-optimal decoder from the Petz recovery map. We then use these codes as building blocks for encoded analog dynamics. Symmetry-preserving Hamiltonians generate block-structured dynamical Lie algebras implementable transversally, while controlled symmetry-breaking terms serve as non-transversal resources for universal dynamics. These results provide explicit non-Abelian covariant codes and a framework for robust analog quantum simulation.
+Quantum error correction compatible with continuous symmetries is a fundamental problem in quantum information and a possible route to robust analog quantum simulation. Because the Eastin-Knill theorem forbids exact codes with continuous transversal symmetries, we construct explicit \(SU(d)\)-covariant approximate codes that exploit permutation symmetry to spread logical information uniformly across all physical subsystems. For one-, two-, and three-qudit erasures at known locations, we prove worst-case purified-distance scaling \(O(1/N)\), which matches known approximate Eastin-Knill lower bounds up to constants, and we extend the reduced-state analysis to general flagged local noise. Exact permutation symmetry of this kind is available only up to three erased sites; for an arbitrary fixed number $k$ of erased sites, we instead show that Haar-random and efficiently sampled encodings achieve worst-case distance $O(\sqrt{k}/N)$ with probability exponentially close to one. For single-qudit erasure, we construct an explicit near-optimal decoder from the Petz recovery map. We then use these codes as building blocks for encoded analog dynamics. Symmetry-preserving Hamiltonians generate block-structured dynamical Lie algebras implementable transversally, while controlled symmetry-breaking terms serve as non-transversal resources for universal dynamics. These results provide explicit non-Abelian covariant codes and a framework for robust analog quantum simulation.
 
 \end{abstract}
 \maketitle 
@@ -257,7 +257,7 @@ Covariant codes can support continuous groups of transversal logical operations 
 Covariant AQEC is therefore a natural candidate for protecting analog dynamics. Rather than digitizing the evolution into a long protected circuit, one chooses an encoded subspace that carries the required continuous evolution and suppresses the information that local noise leaks to the environment. Approximate correctability is what makes this possible in finite dimensions: it evades the Eastin--Knill obstruction while keeping transversal implementations of the continuous symmetry generators. This matters beyond analog computation, because the same trade-off between symmetry and correctability constrains any fault-tolerant scheme that has to respect a continuous symmetry. Explicit and flexible constructions, however, remain scarce. Many existing approaches assume Abelian or otherwise restricted symmetries, rely on randomization, or treat only single-site noise, whereas physical settings usually involve non-Abelian symmetries and errors acting on several subsystems or with a more general local structure. This leads to the question we address here: can one construct finite-dimensional covariant AQECCs for non-Abelian symmetries such as $SU(d)$, with controllable performance under general multi-qudit noise models?
 
 We answer this question positively. As summarized in Section~\ref{sec:main_summary}, we construct explicit finite-dimensional $SU(d)$-covariant AQECCs in which the logical system transforms as the fundamental representation and the physical system consists of many local $SU(d)$ degrees of freedom. The main idea is to use the freedom available inside the physical representation space to impose permutation symmetries on the code. These symmetries spread the logical information nearly uniformly across the physical subsystems, so that the reduced states seen by local noise depend only weakly on the logical input. We first illustrate this mechanism for $SU(2)$ in Section~\ref{sec:main_su2}, and then develop the general $SU(d)$ construction in Section~\ref{sec:main_sud}. 
-This gives near-optimal $\Theta(1/n)$ worst-case purified-distance scaling for one-, two-, and three-qudit flagged erasures, matching known covariant-code lower bounds up to constants~\cite{Faist2020,Zhou2021}. 
+This gives $O(1/n)$ worst-case purified-distance scaling for one-, two-, and three-qudit flagged erasures. For single-qudit erasure this scaling is near-optimal, matching known covariant-code lower bounds up to constants~\cite{Faist2020,Zhou2021}. 
 Making all $k$-site reduced states exactly equal requires a permutation symmetry that can carry any $k$ sites onto any other $k$ sites, and no such symmetry is available once $k$ exceeds three, so this route stops at three erased sites. In Section~\ref{subsec:main_multisite_erasure_noise} we reach an arbitrary fixed number $k$ of erased sites by replacing exact symmetry with typicality. Covariance alone leaves a large family of admissible encodings, and we show that a Haar-random member of this family is, with probability exponentially close to one in $n$, simultaneously good for all $\binom nk$ erased sets, with worst-case distance $O(\sqrt{k(d^2-1)}/n)$.
 Read as a statement about covariant codes as a whole, this says that the encodings leaking an atypically large amount of logical information to some erased subsystem form an exponentially small fraction of the family. 
 Typicality by itself does not produce a code one can write down, because specifying a Haar-random encoding takes exponentially many parameters, and sampling one costs as many random bits. We therefore narrow the search to a finite subfamily of encodings, each generated from a short seed.
@@ -342,9 +342,9 @@ A concentration argument (Theorem~\ref{thrm:main_haar_typical}) then shows that 
 
 A Haar-random code already achieves the resulting erasure bound (Theorem~\ref{thrm:main_multisite_erasure_haar}), and combining it with the efficient sampling gives a family of $SU(d)$-covariant codes, correctable with high probability over the random seed against flagged erasure on any fixed number $k$ of sites, uniformly over the distribution of erased sets (Corollary~\ref{thrm:main_multisite_erasure}):
 $$
-d(\mathcal R_p\mathcal N_p\mathcal E,\mathrm{id})\le \frac{\sqrt{k(d^2-1)}}{2\sqrt2}\,\frac1n+O_{d,k}(n^{-2}).
+d(\mathcal R_p\mathcal N\mathcal E,\mathrm{id})\le \frac{\sqrt{k(d^2-1)}}{2\sqrt2}\,\frac1n+O_{d,k}(n^{-2}).
 $$
-Near-optimal $1/n$ protection against flagged erasure is therefore not limited to at most three sites and it extends, with the same scaling in $n$ and an explicit $\sqrt k$ dependence on the number of erased sites, to erasure on any fixed number of physical sites.
+The $1/n$ protection against flagged erasure is therefore not limited to at most three sites, and it extends, with the same scaling in $n$ and an explicit $\sqrt k$ dependence on the number of erased sites, to erasure on any fixed number of physical sites. We make no optimality claim for $k>1$, since the covariant lower bounds we use~\cite{Faist2020,Zhou2021} are stated for single-qudit erasure, so neither the $1/n$ constant nor the $\sqrt k$ dependence is matched by a converse for $k$-site erasure.
 
 This also changes how the construction should be read. Covariance by itself leaves the whole family of admissible encodings, and what the concentration argument says is that the members for which some erased subsystem reveals an atypically large amount of logical information form an exponentially small fraction of it. Poorly performing encodings do exist, the seed encoding itself among them, since erasing the one site that carries the logical qudit reveals the logical state completely. But they are non-generic, so the protection does not come from fine-tuning one special code, it becomes clear that approximate decoupling from any fixed-size erased subsystem is a typical property of covariant codes.
 The efficient sampler then shows that such an encoding can also be built. Full Haar randomness is not what the error-correcting property needs: the concentration argument uses only second and fourth moments, so four-wise independent phases generated from a short seed do the same work.
@@ -1800,6 +1800,8 @@ e_{\pi(1)}\otimes\cdots\otimes e_{\pi(d)}
 $$
 be the normalized totally antisymmetric state of $d$ qudits. This is the unique $SU(d)$-invariant vector in $(V_{\omega_1})^{\otimes d}$, and the reduced state of any $s\le d$ of its tensor factors is proportional to a projector onto an antisymmetric subspace (Lemma~\ref{lem:singlet-red-states}). In particular, every one-site reduced state is the maximally mixed state $\tau:=I_d/d$.
 
+Throughout this section $n=qd+1$. This is not an extra assumption: by Lemma~\ref{lem:fundamental_in_extirior_power} at $r=1$, the physical space $(V_{\omega_1})^{\otimes n}$ contains a copy of $V_{\omega_1}$ if and only if $n\equiv1\pmod d$, so for any other $n$ the multiplicity space vanishes and no covariant code of this type exists at all. It is also weaker than what the $k=2$ and $k=3$ constructions above require, since those additionally need $n$, respectively $n-1$, to be a prime power.
+
 We partition the $n=qd+1$ physical positions into a distinguished position $0$ and $q$ background blocks $B_1,\ldots,B_q$ of size $d$, and define the seed isometry
 $$
 \mathcal{V}_0\ket\psi
@@ -1882,9 +1884,9 @@ This is proved as Theorem~\ref{thm:haar-uniform}. The argument writes each matri
 A useful way to read this result is that the error-correcting property does not rely on fine-tuning a special multiplicity vector. Covariance first restricts the encoding to a fixed isotypic component, and the remaining freedom is the choice of a direction in its multiplicity space. Theorem~\ref{thrm:main_haar_typical} shows that, with respect to the natural Haar measure on this space, the set of multiplicity vectors for which some erased subsystem reveals an atypically large amount of logical information has exponentially small measure. Specially aligned and poorly performing vectors certainly exist: the seed vector $\ket{m_0}$ itself is one, since $\mathcal{V}_0$ leaves the logical qudit unencoded at site $0$, so erasing that single site reveals the logical state completely. Such vectors are non-generic. Approximate decoupling from any fixed-size erased subsystem is therefore a typical property of the covariant sector rather than a feature of an isolated construction.
 
 \paragraph{Multi-site erasure bound for a Haar-random code.}
-For a distribution $p=(p_S)_{|S|=k}$ on the $k$-element subsets of $\{1,\ldots,n\}$, the flagged $k$-site erasure channel~\eqref{eq:erasure_noise} and by Eq.~\eqref{eq:dual_to_erasure} the complementary channel to $\mathcal N_p\circ\mathcal E_m$ is
+Let $\mathcal N$ be the flagged $k$-site erasure channel~\eqref{eq:erasure_noise} with a distribution $p=(p_S)_{|S|=k}$ on the $k$-element subsets of $\{1,\ldots,n\}$. By Eq.~\eqref{eq:dual_to_erasure}, the complementary channel to $\mathcal N\circ\mathcal E_m$ is
 $$
-\widehat{\mathcal N_p\circ\mathcal E_m}(\rho_L)
+\widehat{\mathcal N\circ\mathcal E_m}(\rho_L)
 =
 \sum_{|S|=k}
 p_S
@@ -1898,7 +1900,7 @@ As in the three-site case, the environment can access the logical state only thr
 Let $d\ge2$ and $k\ge1$ be fixed. For every sufficiently large $n=qd+1$, let $\ket m$ be Haar-random in $M_{\omega_1}$ and let $\mathcal E_m$ be as above. With probability at least $1-e^{-\Omega_d(n)}$ over $\ket m$, the following holds: for every distribution $p$ on the $k$-element subsets of $\{1,\ldots,n\}$ there exists a recovery channel $\mathcal R_p$ such that
 $$
 d\left(
-\mathcal R_p\circ\mathcal N_p\circ\mathcal E_m,
+\mathcal R_p\circ\mathcal N\circ\mathcal E_m,
 \mathrm{id}
 \right)
 \le
@@ -1937,9 +1939,9 @@ p_S
 \otimes
 \lambda_{k,n},
 $$
-where $\lambda_{k,n}$ is taken from Eq.~\eqref{eq:lambda_k_n}, so that $\Lambda_0$ is a constant channel in the sense of Eq.~\eqref{eq:constant_channel_def}. The three channels $\widehat{\mathcal N_p\circ\mathcal E_m}$, $\overline\Lambda$, and $\Lambda_0$ are block diagonal with respect to the same flag decomposition and carry the same classical weights $p_S$. Root fidelity of two such block-diagonal states is the $p$-weighted sum of the block root fidelities, so for every reference-assisted input the Fuchs--van de Graaf inequality $1-f(\rho,\sigma)\le\frac12\|\rho-\sigma\|_1$ gives, block by block,
+where $\lambda_{k,n}$ is taken from Eq.~\eqref{eq:lambda_k_n}, so that $\Lambda_0$ is a constant channel in the sense of Eq.~\eqref{eq:constant_channel_def}. The three channels $\widehat{\mathcal N\circ\mathcal E_m}$, $\overline\Lambda$, and $\Lambda_0$ are block diagonal with respect to the same flag decomposition and carry the same classical weights $p_S$. Root fidelity of two such block-diagonal states is the $p$-weighted sum of the block root fidelities, so for every reference-assisted input the Fuchs--van de Graaf inequality $1-f(\rho,\sigma)\le\frac12\|\rho-\sigma\|_1$ gives, block by block,
 $$
-1-F\left(\widehat{\mathcal N_p\circ\mathcal E_m},\overline\Lambda\right)
+1-F\left(\widehat{\mathcal N\circ\mathcal E_m},\overline\Lambda\right)
 \le
 \frac12
 \max_{|S|=k}
@@ -1949,7 +1951,7 @@ $$
 $$
 while $d(\overline\Lambda,\Lambda_0)=d(\overline\Phi_{k,n},\Lambda_{k,n})$. By Eq.~\eqref{eq:distance_def}, $d(\cdot,\cdot)$ is the supremum over purified logical inputs of the Bures-type state distance $\sqrt{1-f}$, and a supremum of metrics is a metric, so the triangle inequality gives
 $$
-d\left(\widehat{\mathcal N_p\circ\mathcal E_m},\Lambda_0\right)
+d\left(\widehat{\mathcal N\circ\mathcal E_m},\Lambda_0\right)
 \le
 \sqrt{\tfrac12r_k^{3/2}D_q^{-1/4}}
 +
@@ -1958,12 +1960,12 @@ $$
 The first term is $e^{-\Omega_d(n)}$, because $D_q$ grows exponentially in $n$ by Lemma~\ref{lem:dimension_bound} while $r_k$ is fixed. By Eq.~\eqref{eq:mean-fidelity} and Eq.~\eqref{eq:distance_def}, the second term equals $\sqrt{k(d^2-1)/8}\,n^{-1}+O_{d,k}(n^{-2})$. The complementary-channel theorem, Eq.~\eqref{eq:beny}, gives
 \begin{align*}
 \min_{\mathcal R_p}
- d\left(\mathcal R_p\circ\mathcal N_p\circ\mathcal E_m,\mathrm{id}\right)
+ d\left(\mathcal R_p\circ\mathcal N\circ\mathcal E_m,\mathrm{id}\right)
 &=
 \min_{\Lambda\,\mathrm{constant}}
- d\left(\widehat{\mathcal N_p\circ\mathcal E_m},\Lambda\right)\\
+ d\left(\widehat{\mathcal N\circ\mathcal E_m},\Lambda\right)\\
 &\le
- d\left(\widehat{\mathcal N_p\circ\mathcal E_m},\Lambda_0\right),
+ d\left(\widehat{\mathcal N\circ\mathcal E_m},\Lambda_0\right),
 \end{align*}
 and the stated bound follows.
 \end{proof}
@@ -2007,7 +2009,7 @@ Let $\ket{m_s}$ be the multiplicity vector produced by Theorem~\ref{thrm:main_ef
 Let $d\ge2$ and $k\ge1$ be fixed. For every sufficiently large $n=qd+1$, let $\ket{m_s}$ and $\mathcal E_s$ be as above. With probability at least $1-e^{-\Omega_d(n)}$ over the seed $s$, the following holds: for every distribution $p$ on the $k$-element subsets of $\{1,\ldots,n\}$ there exists a recovery channel $\mathcal R_p$ such that
 $$
 d\left(
-\mathcal R_p\circ\mathcal N_p\circ\mathcal E_s,
+\mathcal R_p\circ\mathcal N\circ\mathcal E_s,
 \mathrm{id}
 \right)
 \le
@@ -3108,7 +3110,7 @@ from this symmetry. This provides a natural way to encode information
 while keeping as much of the relevant dynamics as possible in transversal
 form.
 
-One option is to use a fully $\mathfrak{su}(d)$-covariant code, where $d=\dim\mathcal H$, described in previous sections. Such a code has near-optimal AQEC performans and makes all generators of $\mathfrak{su}(d)$ act transversally. However, as discussed above, this approach can be costly, because the local physical dimension must scale with the dimension of the logical Hilbert space. This makes the fully covariant construction difficult to scale for large analog systems.
+One option is to use a fully $\mathfrak{su}(d)$-covariant code, where $d=\dim\mathcal H$, described in previous sections. Such a code has the AQEC performance established in the previous sections and makes all generators of $\mathfrak{su}(d)$ act transversally. However, as discussed above, this approach can be costly, because the local physical dimension must scale with the dimension of the logical Hilbert space. This makes the fully covariant construction difficult to scale for large analog systems.
 
 The block-encoding approach gives a more symmetry-adapted alternative. Instead of imposing covariance with respect to all of $\mathfrak{su}(\mathcal H)$, we use a code covariant with respect to
 $$
@@ -3182,8 +3184,8 @@ Theorem~\ref{thm:breakers_suff_cond} gives only a sufficient condition for unive
 
 \section{Discussion and Outlook}\label{sec:main_disc}
 
-To summarize, in the first part of the paper, we constructed several families of \(SU(d)\)-covariant AQECC. These codes have near-optimal asymptotic performance under local erasure noise, since the recovery error scales
-as \(1/n\) for one-qudit, two-qudit, and three-qudit flagged erasure models. We then constructed a decoder for the single-qudit flagged erasure model using the Petz recovery map. This decoder is near-optimal and achieves \(1/n\) scaling, up to constants depending on the physical and logical dimensions. We also analyze the same codes
+To summarize, in the first part of the paper, we constructed several families of \(SU(d)\)-covariant AQECC. The recovery error of these codes scales
+as \(1/n\) for one-qudit, two-qudit, and three-qudit flagged erasure models, and for single-qudit erasure this scaling is near-optimal. We then constructed a decoder for the single-qudit flagged erasure model using the Petz recovery map. This decoder is near-optimal and achieves \(1/n\) scaling, up to constants depending on the physical and logical dimensions. We also analyze the same codes
 under arbitrary flagged noise on at most three qudits, obtaining the more general, but weaker, scaling \(1/\sqrt n\). Because exactly $k$-transitive permutation groups do not exist for $k>3$, this symmetry-based construction cannot be extended directly beyond three erased sites. We removed this restriction by replacing exact permutation symmetry with a Haar-random multiplicity vector: a typical draw gives a code whose $k$-site reduced states are all close to one another, rather than exactly equal, for any fixed $k$, and we gave an efficient classical procedure for sampling such a typical code from a seed of $O(n\log d)$ random bits. This yields a family of \(SU(d)\)-covariant codes correctable against flagged erasure on any fixed number \(k\) of sites, with recovery error scaling as \(O(\sqrt{k(d^2-1)}/n)\). The trace-norm argument used for non-erasure noise applies to these codes as well, giving \(O(\sqrt{k/n})\) correctability against arbitrary flagged noise on any fixed number \(k\) of sites. We read this less as the construction of one more code than as a statement about the covariant sector itself. Once covariance has fixed the isotypic component, the only remaining freedom is a direction in the multiplicity space, and the directions along which some erased subsystem learns an atypically large amount about the logical state have exponentially small Haar measure. Badly aligned directions exist, the unencoded seed vector among them, but they are non-generic, so approximate decoupling from any fixed-size erased subsystem is typical rather than fine-tuned. The efficient sampler adds a second reading of the same kind. Haar randomness establishes that good directions are abundant, but a generic one is not something that can be written down, and the sampling procedure shows that the abundance survives when the continuous ensemble is replaced by four-wise independent phases from a seed of $O(n\log d)$ bits. What the error-correcting property depends on is therefore not Haar randomness but the low-order moments the concentration argument consumes, and those are already available inside a structured describable family.
 
 In the second part of the paper, we introduced block encodings that are covariant with respect to algebras of the form
@@ -3208,7 +3210,7 @@ Second, there is an analogy with the behavior of tensor products of stabilizer c
 \(\mathfrak{su}(d_1)\oplus\mathfrak{su}(d_2)\)-covariant block code is obtained from the corresponding \(SU(d_1)\)- and \(SU(d_2)\)-covariant approximate codes, and its performance under two-qudit erasure noise preserves the same \(1/n\)
 scaling. This remains true for both in-block and inter-block erasures.
 
-Although continuous covariance imposes a $\Theta(1/n)$ lower bound on
+Although continuous covariance imposes an $\Omega(1/n)$ lower bound on
 the worst-case recovery distance, this scaling should be viewed as a
 resource--accuracy tradeoff rather than as an accuracy floor.  A target
 error $\varepsilon$ can still be reached with
@@ -3327,7 +3329,7 @@ We thank Nikita Romanov and Fangjun Hu for carefully reading the manuscript and 
 
 \parbox[t]{0.22\textwidth}{$\Lambda_0$} & \parbox[t]{0.72\textwidth}{A constant channel, i.\,e. $\Lambda_0(\rho)=\operatorname{Tr}(\rho)\rho_0$ for a fixed state $\rho_0$, see Eq.~\eqref{eq:constant_channel_def}.} \\[0.6em]
 
-\parbox[t]{0.22\textwidth}{$\mathcal N_p$} & \parbox[t]{0.72\textwidth}{The flagged $k$-site erasure channel with distribution $p=(p_S)_{|S|=k}$ over the erased sets, see Eq.~\eqref{eq:erasure_noise}.} \\[0.6em]
+\parbox[t]{0.22\textwidth}{$\mathcal R_p$} & \parbox[t]{0.72\textwidth}{A recovery channel for flagged $k$-site erasure with distribution $p=(p_S)_{|S|=k}$ over the erased sets, Eq.~\eqref{eq:erasure_noise}.} \\[0.6em]
 
 \parbox[t]{0.22\textwidth}{$\widehat{\mathcal N}_S$} & \parbox[t]{0.72\textwidth}{A complementary channel to the local noise channel $\mathcal N_S$ acting on $A_S$.} \\[0.6em]
 
@@ -3490,7 +3492,7 @@ We thank Nikita Romanov and Fangjun Hu for carefully reading the manuscript and 
 
 \parbox[t]{0.22\textwidth}{$\ket{m_s}$} & \parbox[t]{0.72\textwidth}{The flat multiplicity vector generated from the seed $s$, see Eq.~\eqref{eq:family_of_multiplicity_vecs}.} \\[0.6em]
 
-\parbox[t]{0.22\textwidth}{$D_q$} & \parbox[t]{0.72\textwidth}{The dimension of $M_{\omega_1}\cong[q+1,q^{d-1}]$, see Lemma~\ref{lem:dimension_formula} for its value and Lemma~\ref{lem:dimension_bound} for the lower bound showing $D_q=e^{\Theta(n)}$.} \\[0.6em]
+\parbox[t]{0.22\textwidth}{$D_q$} & \parbox[t]{0.72\textwidth}{The dimension of $M_{\omega_1}\cong[q+1,q^{d-1}]$, see Lemma~\ref{lem:dimension_formula} for its value and Lemma~\ref{lem:dimension_bound} for the lower bound $D_q=e^{\Omega_d(n)}$ used throughout}. \\[0.6em]
 
 \parbox[t]{0.22\textwidth}{$P_g$, $P_\pi$} & \parbox[t]{0.72\textwidth}{The permutation operator on the physical space, see Eq.~\eqref{eq:group_act_on_phys_space}; written $P_\pi$ when the permutation is denoted $\pi\in S_n$.} \\[0.6em]
 
@@ -4779,6 +4781,7 @@ For notation see Section~\ref{sec:supple_sud} and Nomenclature section.
     \]
     where since $S_\lambda(V)$ is still irreducible as a representation of $SU(d)$, we have $m_{\lambda}\in \{0,1\}$ for every
     $\lambda$.
+    The restriction $S_\lambda(V)\downarrow_{SU(d)}$ is indeed irreducible. By the unitarian trick, $S_\lambda(V)$ is irreducible as a representation of the compact group $U(d)$, because $\mathfrak{gl}_d(\C)$ is the complexification of $\mathfrak u(d)$ and the two therefore have the same invariant subspaces. Every element of $U(d)$ is the product of an element of $SU(d)$ with a central phase $e^{i\theta}I$, and the latter acts on $S_\lambda(V)\subseteq V^{\otimes|\lambda|}$ by the scalar $e^{i|\lambda|\theta}$. A subspace invariant under $SU(d)$ is therefore invariant under all of $U(d)$, hence is $0$ or $S_\lambda(V)$. Irreducibility of the restriction then makes $\operatorname{Hom}_{SU(d)}(V_{\omega_1},S_\lambda(V)\downarrow_{SU(d)})$ one-dimensional when $S_\lambda(V)\downarrow_{SU(d)}\cong V_{\omega_1}$, and zero otherwise.
     We need to show that $m_\lambda=1$ for exactly one $\lambda$. Indeed,
     $S_\lambda(V) \downarrow_{S U(d)} \cong V_{\omega_1}$ happens exactly iff $\lambda=\left(q+1, q^{d-1}\right)$ for some $q\geq 0$.
     Since also $|\lambda|=n$, we have $n=(q+1)+q(d-1)=d q+1$, so $q=\frac{n-1}{d}$ is an integer. 
@@ -5858,6 +5861,7 @@ We fix an isometric Schur--Weyl inclusion
   W_{\omega_1}:V_{\omega_1}\otimes M_{\omega_1}\longrightarrow V_{\omega_1}^{\otimes n},
 \end{equation}
 which is obviously an $SU(d)$- and $S_n$-intertwiner.
+Such an inclusion exists and is unique up to a phase. Schur--Weyl duality decomposes $V_{\omega_1}^{\otimes n}$ into the summands $\left(S_\lambda(V)\downarrow_{SU(d)}\right)\otimes[\lambda]$, and the Specht modules $[\lambda]$ are pairwise non-isomorphic, so these summands are pairwise non-isomorphic as $SU(d)\times S_n$-modules. By Lemma~\ref{lem:M_module_irreducibility} exactly one of them has first factor $V_{\omega_1}$, namely $\lambda_q=(q+1,q^{d-1})$ with $M_{\omega_1}\cong[\lambda_q]$. Hence $V_{\omega_1}\otimes M_{\omega_1}$ is irreducible as an $SU(d)\times S_n$-module, being an external tensor product of irreducibles, and occurs in $V_{\omega_1}^{\otimes n}$ with multiplicity one. Schur's lemma then makes any two isometric intertwiners of the form~\eqref{eq:W-inclusion} differ by a unimodular scalar. Consequently $\mathcal{V}_m$ below is determined by $\ket m$ up to a global phase, which leaves $\mathcal E_m$ unchanged, and the amplitudes of $\ket m$ in a fixed Young--Yamanouchi basis of $M_{\omega_1}$ are well defined.
 Since $\mathcal{V}_0$ is an $SU(d)$-intertwiner into the fundamental isotypic component, Schur's lemma gives a unit vector $\ket{m_0}\in M_{\omega_1}$ such that, after fixing the identification of the irrep factor,
 \begin{equation}
 \label{eq:seed-multiplicity-vector}
@@ -6008,7 +6012,7 @@ If it is outside the retained $k$-set, which occurs with probability $(n-k)/n$, 
 If the distinguished position is the $j$th retained position, which occurs with probability $1/n$, that factor contains $X$, while the remaining $k-1$ factors form a uniform ordered sample from the background.  Summing over $j$ gives the second term.  
 \end{proof}
 
-\begin{smlemma}[\elo{Can this lemma be applied to the previous propositions?}]
+\begin{smlemma}
 \label{lem:bures-expansion}
 Let $r$ be fixed.  Let $\eta>0$ be an $r\times r$ density operator with eigenvalues $\lambda_1,\ldots,\lambda_r$, and let $\Delta=\Delta^\dagger$ satisfy $\Tr\Delta=0$ and $\eta+\Delta\ge0$.  If $\lambda_{\min}(\eta)\ge c>0$ and $\|\Delta\|_2$ is sufficiently small, then, in an eigenbasis of $\eta$,
 \begin{equation}
@@ -6099,8 +6103,17 @@ where
     Both $\overline\Phi_{k,n}$ and $\Lambda_{k,n}$ are $SU(d)$-covariant under the fundamental input action and the collective output action.  Indeed, every $\beta_{\ell,N}$ is $SU(d)$-invariant.  Therefore Lemma~\ref{fidelity_opt} applies,
     meaning that optimum is attained on maximally mixed state $I_d/d$, i. e.
     \[
-        F(\overline\Phi_{k,n},\Lambda_{k,n})=f(\sigma_{k,n},\eta_{k,n})=f(\eta_{k,n}+\Delta_{k,n},\eta_{k,n}).
+        F(\overline\Phi_{k,n},\Lambda_{k,n})=f(\sigma_{k,n},\eta_{k,n})=f(\eta_{k,n}+\Delta_{k,n},\eta_{k,n}),
     \]
+    where we set
+    \begin{align}
+    \sigma_{k,n}
+    &:=(\overline\Phi_{k,n}\otimes\id_R)(\Psi_{LR}),\\
+    \eta_{k,n}
+    &:=(\Lambda_{k,n}\otimes\id_R)(\Psi_{LR})
+        =\lambda_{k,n}\otimes\tau_R,\\
+    \Delta_{k,n}&:=\sigma_{k,n}-\eta_{k,n}.
+    \end{align}
     Let $R\cong V_{\omega_1}$ be a reference and let
     \[
     \ket{\Psi_d}_{LR}=\frac1{\sqrt d}\sum_{a=1}^d\ket a_L\ket a_R,
@@ -6114,15 +6127,6 @@ where
     \label{eq:Gamma}
     \Gamma_{jR}:=\Psi_{jR}-\tau_j\otimes\tau_R.
     \end{equation}
-    Set
-    \begin{align}
-    \sigma_{k,n}
-    &:=(\overline\Phi_{k,n}\otimes\id_R)(\Psi_{LR}),\\
-    \eta_{k,n}
-    &:=(\Lambda_{k,n}\otimes\id_R)(\Psi_{LR})
-        =\lambda_{k,n}\otimes\tau_R,\\
-    \Delta_{k,n}&:=\sigma_{k,n}-\eta_{k,n}.
-    \end{align}
     Notice, that
     \begin{equation}
     \label{eq:exact-choi-difference}
@@ -6171,7 +6175,31 @@ Since $\Tr(\tau^2)=1/d$, the second part of Eq.~\eqref{eq:Aj-norm} follows. Ther
   \Tr(\Delta_{k,n}^2)
   =\frac{k(d^2-1)}{d^{k+1}n^2}+O_{d,k}(n^{-3}),
 \end{equation}
-which follows from Eq.~\eqref{eq:Delta-leading} and Eq.~\eqref{eq:Aj-norm}. By~\eqref{eq:Delta-leading}, $\eta_{k,n}$ is full rank for sufficiently large $n$ and has minimum eigenvalue bounded below by a positive constant depending only on $d,k$.  Apply Lemma~\ref{lem:bures-expansion} with $r=d^{k+1}$, $\epsilon=1/n$, and then use Eq.~\eqref{eq:Delta-HS}:
+which follows from Eq.~\eqref{eq:Delta-leading} and Eq.~\eqref{eq:Aj-norm}.
+
+The spectral hypothesis of Lemma~\ref{lem:bures-expansion} holds from an explicit threshold on. Since $\tau=I_d/d$, Proposition~\ref{prop:exact-mean-channel} writes $\lambda_{k,n}-I/d^k$ as the convex combination
+\[
+  \lambda_{k,n}-\frac{I}{d^k}
+  =\frac{n-k}{n}\left(\beta_{k,N}-\tau^{\otimes k}\right)
+   +\frac1n\sum_{j=1}^k\left(\tau^{(j)}\otimes\beta_{k-1,N}^{(\widehat j)}-\tau^{\otimes k}\right),
+\]
+so Lemma~\ref{lem:collision} and $\binom{k-1}2\le\binom k2$ give
+\[
+  \left\|\eta_{k,n}-\frac{I}{d^{k+1}}\right\|_1
+  =\left\|\lambda_{k,n}-\frac{I}{d^k}\right\|_1
+  \le 2\binom k2\frac{d-1}{n-2},
+\]
+using $\eta_{k,n}=\lambda_{k,n}\otimes\tau_R$ and $\|\tau_R\|_1=1$. As $\|\cdot\|_\infty\le\|\cdot\|_1$,
+\[
+  \lambda_{\min}(\eta_{k,n})
+  \ \ge\ \frac{1}{d^{k+1}}-2\binom k2\frac{d-1}{n-2}
+  \ \ge\ \frac{1}{2d^{k+1}}
+  \qquad\text{whenever}\qquad
+  n\ \ge\ n_0(d,k):=2+2k(k-1)(d-1)d^{k+1}.
+\]
+In particular $\eta_{k,n}$ is then full rank, and Lemma~\ref{lem:bures-expansion} applies with $c=\tfrac12 d^{-(k+1)}$ for every $n\ge n_0(d,k)$. For $k=1$ no two sampled sites can collide, $\beta_{1,N}=\tau$ exactly, and $n_0(d,1)=2$.
+
+Apply Lemma~\ref{lem:bures-expansion} with $r=d^{k+1}$, $\epsilon=1/n$, and then use Eq.~\eqref{eq:Delta-HS}:
 \begin{align*}
   f(\sigma_{k,n},\eta_{k,n})
   &=1-\frac{d^{k+1}}8\Tr(\Delta_{k,n}^2)
@@ -6626,7 +6654,7 @@ representation given by
 t_a \rightarrow T_a \equiv \sum_{i=1}^n T_a^{(i)}, \quad a=1,\ldots,d^2-1,
 \end{gathered}
 \end{equation} 
-where $T_a^{(i)}$ is a representation of $t_a$ on the $i$-th physical space $V_{\omega_r}$, acting as in Eq.~\eqref{eq:action_on_extirior_power}. If encoding $\mathcal{E}$, which is $\mathfrak{su}(d)$-covariant with respect to defined physical and logical representations,  defines a code space invariant under cyclic permutations of physical qudits, then $\mathcal{E}$ is $\Theta\left(\frac{1}{\sqrt{n}}\right)$-approximate against arbitrary single-qudit noise channel $\mathcal{N}(\sigma)=\sum_{i=1}^n p_i|i\rangle\left\langle\left. i\right|_F \otimes\left(\mathcal{N}_i \otimes \mathrm{id}_{\hat{i}}\right)(\sigma),\right.$.
+where $T_a^{(i)}$ is a representation of $t_a$ on the $i$-th physical space $V_{\omega_r}$, acting as in Eq.~\eqref{eq:action_on_extirior_power}. If encoding $\mathcal{E}$, which is $\mathfrak{su}(d)$-covariant with respect to defined physical and logical representations,  defines a code space invariant under cyclic permutations of physical qudits, then $\mathcal{E}$ is $O_{d}\left(\frac{1}{\sqrt{n}}\right)$-approximate against arbitrary single-qudit noise channel $\mathcal{N}(\sigma)=\sum_{i=1}^n p_i|i\rangle\left\langle\left. i\right|_F \otimes\left(\mathcal{N}_i \otimes \mathrm{id}_{\hat{i}}\right)(\sigma),\right.$.
 \end{smtheorem}
 \begin{proof}
 In Proposition~\ref{prop:SUdcov} we obtained the following form of the reduced state on the \(i\)-th physical qudit:
@@ -6903,7 +6931,7 @@ Thus our encoding \(\mathcal E\) is \(\varepsilon\)-approximate with \(\varepsil
     \end{gathered}
     \end{equation} 
     where $t_a^{(i)}$ is a fundamental of $t_a$ on $i$-th physical space $V_{\omega_1}$. For sufficiently
-    large $n$ there exists an $\mathfrak{su}(d)$-covariant encoding $\mathcal{E}$ with respect to these representations, such that the code space is invariant under action of $\mathrm{PGL}(2, n-1)$ and such encoding $\mathcal{E}$ is $\Theta\left(\frac{1}{\sqrt{n}}\right)$-approximate against arbitrary flagged noise supported on sets of at most three sites, $\mathcal{N}(\sigma)=\sum_{1\leq|S|\leq3} p_S|S\rangle\langle S|_F \otimes\left(\mathcal{N}_S \otimes \mathrm{id}_{\hat S}\right)(\sigma)$, with arbitrary channels $\mathcal N_S$ on $A_S$.
+    large $n$ there exists an $\mathfrak{su}(d)$-covariant encoding $\mathcal{E}$ with respect to these representations, such that the code space is invariant under action of $\mathrm{PGL}(2, n-1)$ and such encoding $\mathcal{E}$ is $O_{d}\left(\frac{1}{\sqrt{n}}\right)$-approximate against arbitrary flagged noise supported on sets of at most three sites, $\mathcal{N}(\sigma)=\sum_{1\leq|S|\leq3} p_S|S\rangle\langle S|_F \otimes\left(\mathcal{N}_S \otimes \mathrm{id}_{\hat S}\right)(\sigma)$, with arbitrary channels $\mathcal N_S$ on $A_S$.
 \end{smtheorem}
 
 \begin{proof}
@@ -6973,7 +7001,7 @@ Thus our encoding \(\mathcal E\) is \(\varepsilon\)-approximate with \(\varepsil
         \leq
         \sqrt{\frac{C_d}{2n}},
     \]
-    so our encoding $\mathcal{E}$ is $\varepsilon$-approximate with $\varepsilon=\Theta\left(\frac{1}{\sqrt{n}}\right)$.
+    so our encoding $\mathcal{E}$ is $\varepsilon$-approximate with $\varepsilon=O_{d}\left(\frac{1}{\sqrt{n}}\right)$.
 \end{proof}
 
 The same lemma applies to an arbitrary fixed number of noisy sites, once the uniform leakage bound~\eqref{eq:uniform-leakage} is supplied by the codes of Section~\ref{subsec:supple_multiqudit_erasure} instead of by exact transitivity.
