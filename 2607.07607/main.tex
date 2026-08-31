@@ -1644,7 +1644,7 @@ Here $\tau^{(ijk)}$ is independent of the logical input, while $\Delta^{(ijk)}(\
 \tau^{(ijk)}
 &=
 \frac{1}{d^3}\mathbf 1
--\frac{1}{d^2 n}
+-\frac{2}{d^2 n}
 \sum_{m=1}^{d^2-1}
 \left(
 t_m^{(i)}t_m^{(j)}
@@ -1653,7 +1653,7 @@ t_m^{(i)}t_m^{(j)}
 \right)
 \nonumber\\
 &\hspace{1cm}
-+\frac{2}{dn(n-2)}
++\frac{4}{dn(n-2)}
 \sum_{m,l,p=1}^{d^2-1}
 d_{mlp}
 t_m^{(i)}t_l^{(j)}t_p^{(k)},
@@ -2736,7 +2736,7 @@ $$
 &=
 \frac{1}{d_1^2}\mathbf 1
 -
-\frac{1}{d_1n_1}
+\frac{2}{d_1n_1}
 \sum_{m=1}^{d_1^2-1}
 t_m^{(i)}t_m^{(j)}
 \\
@@ -2759,7 +2759,7 @@ $$
 &=
 \frac{1}{d_2^2}\mathbf 1
 -
-\frac{1}{d_2n_2}
+\frac{2}{d_2n_2}
 \sum_{m=1}^{d_2^2-1}
 s_m^{(i)}s_m^{(j)}
 \\
@@ -2882,14 +2882,14 @@ $$
 :=
 \frac{I}{d_1^2}
 -
-\frac{1}{d_1n_1}
+\frac{2}{d_1n_1}
 \sum_m t_m^{(i)}t_m^{(j)},
 \\
 \tau_2
 :=
 \frac{I}{d_2^2}
 -
-\frac{1}{d_2n_2}
+\frac{2}{d_2n_2}
 \sum_m s_m^{(i)}s_m^{(j)},
 \\
 \tau_{12}
@@ -2897,7 +2897,7 @@ $$
 \frac{I}{d_1d_2}.
 \end{gathered}
 $$
-These are the logical-input-independent parts of the first in-block, second in-block, and inter-block reduced states, respectively.
+These are the logical-input-independent parts of the first in-block, second in-block, and inter-block reduced states, respectively. 
 
 The explicit fidelity calculation in Proposition~\ref{prop:two_block_fidelity} gives
 \begin{equation}\label{eq:fidelity_2}
@@ -5563,13 +5563,13 @@ From which we get the final formula for $X_b$ as stated in the lemma.
     \[
         \begin{gathered}
             \operatorname{Tr}\left(Y t_m^{(i)}\right)=0,\\
-            \operatorname{Tr}\left(Y t_a^{(i)} t_c^{(j)}\right)=-\frac{1}{4 d n} \delta_{a c},\\
-            \operatorname{Tr}\left(Y t_a^{(i)} t_c^{(j)} t_f^{(k)}\right)=\frac{1}{4 d n(n-2)} d_{a c f},
+            \operatorname{Tr}\left(Y t_a^{(i)} t_c^{(j)}\right)=-\frac{1}{2 d n} \delta_{a c},\\
+            \operatorname{Tr}\left(Y t_a^{(i)} t_c^{(j)} t_f^{(k)}\right)=\frac{1}{2 d n(n-2)} d_{a c f},
         \end{gathered}
     \]
     where $i, j, k$ are distinct site indexes and $a, c, f$ are distinct generator indexes, and in addition $\operatorname{Tr}(Y)=1$, then it can be expressed as
     \[
-        Y=\frac{1}{d^3} \mathbf{1}-\frac{1}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(1)} t_m^{(2)}+t_m^{(1)} t_m^{(3)}+t_m^{(2)} t_m^{(3)}\right)+\frac{2}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(1)} t_n^{(2)} t_p^{(3)} .
+        Y=\frac{1}{d^3} \mathbf{1}-\frac{2}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(1)} t_m^{(2)}+t_m^{(1)} t_m^{(3)}+t_m^{(2)} t_m^{(3)}\right)+\frac{4}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(1)} t_n^{(2)} t_p^{(3)} .
     \]
 \end{smlemma}
 
@@ -5588,12 +5588,12 @@ From which we get the final formula for $X_b$ as stated in the lemma.
     \[
         \operatorname{Tr}\left(Y t_a^{(1)} t_c^{(2)}\right)=\mu \frac{d}{4} \delta_{a c},
     \]
-    and matching second scalar product identity gives us $\mu=-\frac{1}{d^2 n}$.
+    and matching second scalar product identity gives us $\mu=-\frac{2}{d^2 n}$.
     Finally, for three-body coefficient we have
     \[
         \operatorname{Tr}\left(Y t_a^{(1)} t_c^{(2)} t_f^{(3)}\right)=\nu \frac{1}{8} d_{a c f},
     \]
-    and matching third scalar product identity gives us $\nu=\frac{2}{d n(n-2)}$.
+    and matching third scalar product identity gives us $\nu=\frac{4}{d n(n-2)}$.
     This completes our proof.
 \end{proof}
 
@@ -5619,7 +5619,7 @@ Let
 \begin{equation}\label{eq:main-3site-difference}
 \begin{aligned}
     &\rho^{(ijk)}(\rho_L)=
-    \\&=\left(\frac{1}{d^3} \mathbf{1}-\frac{1}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(i)} t_m^{(j)}+t_m^{(i)} t_m^{(k)}+t_m^{(j)} t_m^{(k)}\right)+\frac{2}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(i)} t_n^{(j)} t_p^{(k)}\right) +
+    \\&=\left(\frac{1}{d^3} \mathbf{1}-\frac{2}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(i)} t_m^{(j)}+t_m^{(i)} t_m^{(k)}+t_m^{(j)} t_m^{(k)}\right)+\frac{4}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(i)} t_n^{(j)} t_p^{(k)}\right) +
     \\&+\sum_b r_b\left(\frac{1}{n d^2}\left(t_b^{(i)}+t_b^{(j)}+t_b^{(k)}\right)-\frac{2}{d n(n-2)} \sum_{m=1}^{d^2-1}\left(t_b^{(i)} t_m^{(j)} t_m^{(k)}+t_m^{(i)} t_b^{(j)} t_m^{(k)}+t_m^{(i)} t_m^{(j)} t_b^{(k)}\right)\right).
 \end{aligned}
 \end{equation}
@@ -5647,7 +5647,7 @@ $
     \rho^{(ijk)}(\rho_L)=\tau^{(ijk)}+\sum_a r_a\Delta^{(ijk)}_a.
 $
 Notice that $\rho^{(ijk)}(\rho_L)$ (and thus $\Phi^{(ijk)}$) is a covariant channel, so $\Delta^{(ijk)}_a$ lies in the adjoint representation and $\tau^{(ijk)}$ lies in trivial isotypic components of representation $\operatorname{End}(V_{\omega_1}^{\otimes 3})$.
-Using identities from Proposition~\ref{prop:1_2_and_3_body_action}, one can easily derive the following scalar product identities for $\tau^{(ijk)}$ and $\Delta^{(ijk)}_a$:
+Using identities from Proposition~\ref{prop:1_2_and_3_body_action}, one can easily derive the following scalar product identities for $\tau^{(ijk)}$ and $\Delta^{(ijk)}_a$. 
 \[
 \left\{
 \begin{aligned}
@@ -5666,9 +5666,9 @@ Using identities from Proposition~\ref{prop:1_2_and_3_body_action}, one can easi
 &\operatorname{Tr}\left(\tau^{(ijk)} t_m^{(i)}\right)
 =0, \\
 &\operatorname{Tr}\left(\tau^{(ijk)} t_a^{(i)} t_c^{(j)}\right)
-=-\frac{1}{4 d n} \delta_{a c}, \\
+=-\frac{1}{2 d n} \delta_{a c}, \\
 &\operatorname{Tr}\left(\tau^{(ijk)} t_a^{(i)} t_c^{(j)} t_f^{(k)}\right)
-=\frac{1}{4 d n(n-2)} d_{a c f},
+=\frac{1}{2 d n(n-2)} d_{a c f},
 \end{aligned}
 \right.
 \]
@@ -5699,7 +5699,7 @@ where $\Lambda_0$ is defined in (\eqref{eq:constant_channel_3site}).
     We define the constant channel as
     \begin{equation}\label{eq:constant_channel_3site}
         \begin{gathered}
-            \Lambda_0(\rho_L)=\operatorname{Tr}(\rho_L)\cdot\omega_{\text{flag }} \otimes \left(\frac{1}{d^3} \mathbf{1}-\frac{1}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(i)} t_m^{(j)}+t_m^{(i)} t_m^{(k)}+t_m^{(j)} t_m^{(k)}\right)+\frac{2}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(i)} t_n^{(j)} t_p^{(k)}\right)\\\equiv \operatorname{Tr}(\rho_L)\cdot \omega_{\text{flag }} \otimes \tau.
+            \Lambda_0(\rho_L)=\operatorname{Tr}(\rho_L)\cdot\omega_{\text{flag }} \otimes \left(\frac{1}{d^3} \mathbf{1}-\frac{2}{d^2 n} \sum_{m=1}^{d^2-1}\left(t_m^{(i)} t_m^{(j)}+t_m^{(i)} t_m^{(k)}+t_m^{(j)} t_m^{(k)}\right)+\frac{4}{d n(n-2)} \sum_{m, n, p=1}^{d^2-1} d_{m n p} t_m^{(i)} t_n^{(j)} t_p^{(k)}\right)\\\equiv \operatorname{Tr}(\rho_L)\cdot \omega_{\text{flag }} \otimes \tau.
         \end{gathered}
     \end{equation}
     (notice that $\tau$ is a part of the reduced state, which is independent of the input state, see Eq.~\eqref{eq:main-3site-difference} and Remark~\ref{rem:output_3-site_state}). We drop the flag state $\omega_{\text{flag }}$ in the following calculations, since it doesn't affect the fidelity.
@@ -6911,7 +6911,7 @@ Thus our encoding \(\mathcal E\) is \(\varepsilon\)-approximate with \(\varepsil
         \tau_S
         &:=
         \frac{1}{d^3}\mathbf 1
-        -\frac{1}{d^2 n}
+        -\frac{2}{d^2 n}
         \sum_{m=1}^{d^2-1}
         \left(
             t_m^{(i)}t_m^{(j)}
@@ -6923,7 +6923,7 @@ Thus our encoding \(\mathcal E\) is \(\varepsilon\)-approximate with \(\varepsil
         \\
         &\quad
         +
-        \frac{2}{d n(n-2)}
+        \frac{4}{d n(n-2)}
         \sum_{m,l,p=1}^{d^2-1}
         d_{mlp}
         t_m^{(i)}t_l^{(j)}t_p^{(k)},
@@ -7370,7 +7370,7 @@ where $p_1, p_2$ are combinations of $\{q_{ij}\}$ and $p_{12}:=1-p_1-p_2$ and we
 \end{equation}
 where $\omega_{1, \text{in}}, \omega_{2, \text{in}}$ and $\omega_{\text{inter}}$ are some orthogonal flag states and
 \begin{equation}\label{eq:omega_block}
-    \tau_1:=\frac{I}{d_1^2}-\frac{1}{d_1 n_1} \sum_m t_m^{(i)} t_m^{(j)}, \quad \tau_2:=\frac{I}{d_2^2}-\frac{1}{d_2 n_2} \sum_m s_m^{(i)} s_m^{(j)}, \quad \tau_{12}:=\frac{I}{d_1 d_2}.
+    \tau_1:=\frac{I}{d_1^2}-\frac{2}{d_1 n_1} \sum_m t_m^{(i)} t_m^{(j)}, \quad \tau_2:=\frac{I}{d_2^2}-\frac{2}{d_2 n_2} \sum_m s_m^{(i)} s_m^{(j)}, \quad \tau_{12}:=\frac{I}{d_1 d_2}.
 \end{equation}
 \end{smproposition}
 
@@ -7384,8 +7384,8 @@ where $\bar{t}_a$ and $\bar{s}_b$ are generators of $\mathfrak{su}(d_1)$ and $\m
 There are basically three types of reduced states that the environment "can see": in-block reduced two-qudit states (for each block different)
 \[
 \begin{gathered}
-    \rho_{1,\text {in }}^{(ij)}(\rho_L)=\frac{1}{d_1^2} \mathbf{1}-\frac{1}{d_1 n_1} \sum_{m=1}^{d_1^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_1 d_1} \sum_{b=1}^{d_1^2-1} r_{1, b}\left(t_b^{(i)}+t_b^{(j)}\right),\\
-    \rho_{2,\text {in }}^{(ij)}(\rho_L)=\frac{1}{d_2^2} \mathbf{1}-\frac{1}{d_2 n_2} \sum_{m=1}^{d_2^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_2 d_2} \sum_{b=1}^{d_2^2-1} r_{2, b}\left(t_b^{(i)}+t_b^{(j)}\right),
+    \rho_{1,\text {in }}^{(ij)}(\rho_L)=\frac{1}{d_1^2} \mathbf{1}-\frac{2}{d_1 n_1} \sum_{m=1}^{d_1^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_1 d_1} \sum_{b=1}^{d_1^2-1} r_{1, b}\left(t_b^{(i)}+t_b^{(j)}\right),\\
+    \rho_{2,\text {in }}^{(ij)}(\rho_L)=\frac{1}{d_2^2} \mathbf{1}-\frac{2}{d_2 n_2} \sum_{m=1}^{d_2^2-1} t_m^{(i)} t_m^{(j)}+\frac{1}{n_2 d_2} \sum_{b=1}^{d_2^2-1} r_{2, b}\left(t_b^{(i)}+t_b^{(j)}\right),
 \end{gathered}
 \]
 which we obtained by tracing out one qudit from the three-qudit reduced state $\rho^{(ijk)}(\rho_L)$ obtained in Proposition~\ref{prop:3site-fundamental}. As for the inter-block reduced two-qudit state, we have
