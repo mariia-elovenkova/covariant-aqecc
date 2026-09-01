@@ -10,7 +10,6 @@
 \usepackage{algpseudocode}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{paper-ai}
 
 \sisetup{
   separate-uncertainty = true,
@@ -868,7 +867,6 @@ where $P_g$ is the permutation operator from Eq.~\eqref{eq:group_act_on_phys_spa
 
 We begin the explicit construction with the familiar case of $SU(2)$. The logical system is a spin-$1/2$ degree of freedom, while the physical system consists of many spin-$j$ subsystems. Covariance fixes the symmetry sector in which the code can live, but it still leaves a multiplicity-space freedom. We use this remaining freedom to distribute the logical spin uniformly over the physical sites. For single-site erasure it means that the environment receives a one-site reduced state, and the code is good when this reduced state is nearly independent of the logical input.
 
-%\subsection{\texorpdfstring{Setup and reduced-state strategy}{Setup and reduced-state strategy}}
 \paragraph{Setup and reduced-state strategy.}
 
 Let $V_j$ denote the irreducible spin-$j$ representation of $SU(2)$. We take the logical Hilbert space~\eqref{eq:log_space_rep} to be
@@ -4037,7 +4035,7 @@ From Lemma~\ref{fidelity_opt} we know that the optimal state for computing worst
     \ket{0}\bra{0}=\frac{I}{2} + \frac{1}{2} \sigma_z, \quad \ket{1}\bra{1}=\frac{I}{2} - \frac{1}{2} \sigma_z, \quad \ket{0}\bra{1}=\frac{1}{2} \sigma_x + \frac{i}{2} \sigma_y, \quad \ket{1}\bra{0}=\frac{1}{2} \sigma_x - \frac{i}{2} \sigma_y
 \]
 And, using notation $\tau:=\frac{I_{V_j}}{2j+1},$ and computation of reduced state $\rho^{(i)}\left(\rho_L\right)$ from Proposition~\ref{prop:SU2cov}
-%Don't forget imaginary unit.
+
 \[
     \widehat{\mathcal{N} \circ \mathcal{E}}(\ket{0}\bra{0})=\tau+\beta J_z, \quad \widehat{\mathcal{N} \circ \mathcal{E}}(\ket{1}\bra{1})=\tau-\beta J_z, \quad \widehat{\mathcal{N} \circ \mathcal{E}}(\ket{0}\bra{1})=\beta J_+, \quad \widehat{\mathcal{N} \circ \mathcal{E}}(\ket{1}\bra{0})=\beta J_-
 \]
