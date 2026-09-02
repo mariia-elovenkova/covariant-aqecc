@@ -6,7 +6,7 @@
 %Control: page (0) single
 %Control: year (1) truncated
 %Control: production of eprint (0) enabled
-\begin{thebibliography}{74}%
+\begin{thebibliography}{70}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \@ifx{#1\undefined}
@@ -976,9 +976,9 @@
 \bibitem [{Sup()}]{SuppMat}%
   \BibitemOpen
   \href@noop {} {}\bibinfo {note} {See Supplemental Material at [URL will be
-  inserted by publisher] for detailed proofs, reduced-state calculations,
-  recovery-map constructions, and additional results on covariant approximate
-  quantum error-correcting codes.}\BibitemShut {Stop}%
+  inserted by publisher] for the nomenclature, detailed proofs, reduced-state
+  calculations, the explicit recovery-map construction, and the analysis of
+  erasure on an arbitrary fixed number of qudits.}\BibitemShut {Stop}%
 \bibitem [{\citenamefont {Fletcher}\ \emph {et~al.}(2007)\citenamefont
   {Fletcher}, \citenamefont {Shor},\ and\ \citenamefont
   {Win}}]{PhysRevA.75.012338}%
@@ -1111,42 +1111,4 @@
   }\href {https://doi.org/10.48550/arXiv.2409.19797}
   {10.48550/arXiv.2409.19797} (\bibinfo {year} {2024}),\ \Eprint
   {https://arxiv.org/abs/2409.19797} {arXiv:2409.19797} \BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Kretschmann}\ \emph {et~al.}(2008)\citenamefont
-  {Kretschmann}, \citenamefont {Schlingemann},\ and\ \citenamefont
-  {Werner}}]{KretschmannSchlingemannWerner2008}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
-  {Kretschmann}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
-  {Schlingemann}},\ and\ \bibinfo {author} {\bibfnamefont {R.~F.}\ \bibnamefont
-  {Werner}},\ }\bibfield  {title} {\bibinfo {title} {The
-  information-disturbance tradeoff and the continuity of stinespring's
-  representation},\ }\href {https://doi.org/10.1109/TIT.2008.917696} {\bibfield
-   {journal} {\bibinfo  {journal} {IEEE Transactions on Information Theory}\
-  }\textbf {\bibinfo {volume} {54}},\ \bibinfo {pages} {1708} (\bibinfo {year}
-  {2008})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Macdonald}(1995)}]{Macdonald1995}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {I.~G.}\ \bibnamefont
-  {Macdonald}},\ }\href {https://doi.org/10.1093/oso/9780198534891.001.0001}
-  {\emph {\bibinfo {title} {Symmetric Functions and Hall Polynomials}}}\
-  (\bibinfo  {publisher} {Oxford University Press},\ \bibinfo {year}
-  {1995})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Robbins}(1955)}]{Robbins1955}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Robbins}},\ }\bibfield  {title} {\bibinfo {title} {A remark on stirling's
-  formula},\ }\href {http://www.jstor.org/stable/2308012} {\bibfield  {journal}
-  {\bibinfo  {journal} {The American Mathematical Monthly}\ }\textbf {\bibinfo
-  {volume} {62}},\ \bibinfo {pages} {26} (\bibinfo {year} {1955})}\BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Larsen}\ and\ \citenamefont
-  {Shalev}(2008)}]{LarsenShalev2008}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
-  {Larsen}}\ and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
-  {Shalev}},\ }\bibfield  {title} {\bibinfo {title} {Characters of symmetric
-  groups: Sharp bounds and applications},\ }\href
-  {https://doi.org/10.1007/s00222-008-0145-7} {\bibfield  {journal} {\bibinfo
-  {journal} {Inventiones Mathematicae}\ }\textbf {\bibinfo {volume} {174}},\
-  \bibinfo {pages} {645} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
 \end{thebibliography}%
